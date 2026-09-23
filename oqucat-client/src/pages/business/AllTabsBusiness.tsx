@@ -1,15 +1,15 @@
 import { useMemo } from 'react'
 
-import TabRespSelector from '@/components/TabRespSelector'
 import UserAvatarFallback from '@/components/UserAvatarFallback'
+import WorkspaceLayout from '@/components/WorkspaceLayout'
 import Chat from '@/pages/common/chat/Chat'
 import ChatBadge from '@/pages/common/chat/ChatBadge'
 import Profile from '@/pages/common/profile/Profile'
-import type { TabItem } from '@/types/TabItem'
+import type { WorkspaceItem } from '@/types/WorkspaceItem'
 
 const AllTabsBusiness = () => {
-  const tabs = useMemo(
-    (): TabItem[] => [
+  const items = useMemo(
+    (): WorkspaceItem[] => [
       {
         id: 'chat',
         icon: ChatBadge,
@@ -24,7 +24,7 @@ const AllTabsBusiness = () => {
     []
   )
 
-  return <TabRespSelector tabs={tabs} />
+  return <WorkspaceLayout items={items} workspace="business" />
 }
 
 export default AllTabsBusiness

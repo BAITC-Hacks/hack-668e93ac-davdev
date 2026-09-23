@@ -1,14 +1,14 @@
 import { useMemo } from 'react'
 import { MdBadge as RoleIcon } from 'react-icons/md'
 
-import TabRespSelector from '@/components/TabRespSelector'
-import type { TabItem } from '@/types/TabItem'
+import WorkspaceLayout from '@/components/WorkspaceLayout'
+import type { WorkspaceItem } from '@/types/WorkspaceItem'
 
 import RoleSelection from './RoleSelection'
 
 const AllTabsOnboarding = () => {
-  const tabs = useMemo(
-    (): TabItem[] => [
+  const items = useMemo(
+    (): WorkspaceItem[] => [
       {
         id: 'role',
         icon: RoleIcon,
@@ -18,7 +18,7 @@ const AllTabsOnboarding = () => {
     []
   )
 
-  return <TabRespSelector tabs={tabs} />
+  return <WorkspaceLayout items={items} workspace="onboarding" />
 }
 
 export default AllTabsOnboarding

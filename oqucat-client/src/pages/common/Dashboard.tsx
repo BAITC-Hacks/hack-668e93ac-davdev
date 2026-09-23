@@ -1,5 +1,4 @@
 import Skeleton from '@mui/material/Skeleton'
-import Stack from '@mui/material/Stack'
 import { lazy, type JSX, type LazyExoticComponent } from 'react'
 import { useTranslation } from 'react-i18next'
 
@@ -34,18 +33,7 @@ const Dashboard = () => {
 
   const Component = gates[role]
 
-  return (
-    <Stack
-      sx={{
-        height: '100vh',
-        width: '100vw',
-        alignItems: 'center',
-        overflow: { xs: 'hidden', md: 'auto' },
-      }}
-    >
-      <Component />
-    </Stack>
-  )
+  return <Component />
 }
 
 export default Dashboard

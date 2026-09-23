@@ -4,22 +4,19 @@ import {
   MdNotifications as NotificationsIcon,
 } from 'react-icons/md'
 
-import { authClient } from '@/auth/betterAuth'
-import TabRespSelector from '@/components/TabRespSelector'
 import UserAvatarFallback from '@/components/UserAvatarFallback'
+import WorkspaceLayout from '@/components/WorkspaceLayout'
 import Chat from '@/pages/common/chat/Chat'
 import ChatBadge from '@/pages/common/chat/ChatBadge'
 import EditorPage from '@/pages/common/editor/Editor'
 import Profile from '@/pages/common/profile/Profile'
-import type { TabItem } from '@/types/TabItem'
+import type { WorkspaceItem } from '@/types/WorkspaceItem'
 
 import NotificationsSuperadmin from './notifications/NotificationsSuperadmin'
 
 const AllTabsSuperAdmin = () => {
-  const { data, isPending } = authClient.useSession()
-
-  const tabs = useMemo(
-    (): TabItem[] => [
+  const items = useMemo(
+    (): WorkspaceItem[] => [
       {
         id: 'notifications',
         icon: NotificationsIcon,
@@ -44,11 +41,7 @@ const AllTabsSuperAdmin = () => {
     []
   )
 
-  if (!data || isPending) {
-    return null
-  }
-
-  return <TabRespSelector tabs={tabs} />
+  return <WorkspaceLayout items={items} workspace="superadmin" />
 }
 
 export default AllTabsSuperAdmin

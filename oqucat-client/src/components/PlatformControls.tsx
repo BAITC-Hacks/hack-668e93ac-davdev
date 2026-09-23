@@ -13,7 +13,7 @@ import { changeLanguage } from './i18n/changeLanguage'
 import { getLangName } from './i18n/getLangName'
 
 const PlatformControls = () => {
-  const { t, i18n } = useTranslation('user')
+  const { t, i18n } = useTranslation()
   const { data } = authClient.useSession()
   const { mode, systemMode, setMode } = useColorScheme()
   const isDark = (mode === 'system' ? systemMode : mode) === 'dark'
@@ -26,7 +26,7 @@ const PlatformControls = () => {
         onChange={(event) => {
           changeLanguage(data?.user, i18n, event.target.value)
         }}
-        inputProps={{ 'aria-label': t('navigation.language') }}
+        inputProps={{ 'aria-label': t('common:navigation.language') }}
         sx={{ fontSize: 13, '& fieldset': { border: 0 } }}
       >
         {languages.map((language) => (
@@ -37,7 +37,9 @@ const PlatformControls = () => {
       </Select>
       <IconButton
         aria-label={t(
-          isDark ? 'navigation.lightTheme' : 'navigation.darkTheme'
+          isDark
+            ? 'common:navigation.lightTheme'
+            : 'common:navigation.darkTheme'
         )}
         onClick={() => setMode(isDark ? 'light' : 'dark')}
         size="small"

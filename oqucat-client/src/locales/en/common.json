@@ -350,6 +350,19 @@
     "emailBody": "Hello!\n\nI have encountered a problem with my {{appName}} account:\n\n"
   },
   "navigation": {
+    "primary": "Main navigation",
+    "home": "Back to home",
+    "open": "Open menu",
+    "close": "Close menu",
+    "language": "Interface language",
+    "lightTheme": "Use light theme",
+    "darkTheme": "Use dark theme",
+    "workspaces": {
+      "student": "Student workspace",
+      "business": "Business workspace",
+      "superadmin": "Administration",
+      "onboarding": "Account setup"
+    },
     "tabs": {
       "tasks": "Tasks",
       "team": "My team",

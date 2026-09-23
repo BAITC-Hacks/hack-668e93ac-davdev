@@ -1,5 +1,3 @@
-import TabContext from '@mui/lab/TabContext'
-import TabPanel from '@mui/lab/TabPanel'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Divider from '@mui/material/Divider'
@@ -11,25 +9,65 @@ import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
 import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
-import { useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { MdArrowBack, MdClose, MdMenu, MdSchool } from 'react-icons/md'
-import { Link } from 'react-router-dom'
+import { MdArrowBack, MdClose, MdMenu } from 'react-icons/md'
+import { Link, useSearchParams } from 'react-router-dom'
 
-import type { TabItem } from '@/types/TabItem'
+import type { WorkspaceItem } from '@/types/WorkspaceItem'
 
 import PlatformBrand from './PlatformBrand'
 import PlatformControls from './PlatformControls'
 
-interface UserNavigationProps {
-  tabs: TabItem[]
-  tab: string
-  onSelect: (id: string) => void
+type WorkspaceKind = 'student' | 'business' | 'superadmin' | 'onboarding'
+
+interface WorkspaceLayoutProps {
+  items: WorkspaceItem[]
+  workspace: WorkspaceKind
 }
 
-const UserNavigation = ({ tabs, tab, onSelect }: UserNavigationProps) => {
-  const { t } = useTranslation('user')
+const WorkspaceLayout = ({ items, workspace }: WorkspaceLayoutProps) => {
+  const { t } = useTranslation()
   const [menuOpen, setMenuOpen] = useState(false)
+  const [searchParams, setSearchParams] = useSearchParams()
+  const itemIds = useMemo(() => items.map(({ id }) => id), [items])
+  const requestedItem = searchParams.get('tab')
+  const activeId =
+    requestedItem && itemIds.includes(requestedItem)
+      ? requestedItem
+      : itemIds[0]
+  const activeItem = items.find(({ id }) => id === activeId)
+
+  const selectItem = (id: string) => {
+    setSearchParams(
+      (current) => {
+        const next = new URLSearchParams(current)
+        next.set('tab', id)
+        next.delete('chat')
+        return next
+      },
+      { replace: true }
+    )
+    setMenuOpen(false)
+  }
+
+  useEffect(() => {
+    if (activeId && requestedItem !== activeId) {
+      setSearchParams(
+        (current) => {
+          const next = new URLSearchParams(current)
+          next.set('tab', activeId)
+          return next
+        },
+        { replace: true }
+      )
+    }
+  }, [activeId, requestedItem, setSearchParams])
+
+  if (!activeItem) {
+    return null
+  }
+
   const navigation = (
     <Stack sx={{ height: 1, p: 2.5, gap: 3 }}>
       <Stack
@@ -38,33 +76,32 @@ const UserNavigation = ({ tabs, tab, onSelect }: UserNavigationProps) => {
       >
         <PlatformBrand />
         <IconButton
-          aria-label={t('navigation.close')}
+          aria-label={t('common:navigation.close')}
           onClick={() => setMenuOpen(false)}
           sx={{ display: { md: 'none' } }}
         >
           <MdClose />
         </IconButton>
       </Stack>
+
       <Box>
         <Typography
           variant="overline"
           sx={{ color: 'text.secondary', px: 1.5 }}
         >
-          {t('navigation.workspace')}
+          {t(`common:navigation.workspaces.${workspace}`)}
         </Typography>
         <List
           component="nav"
-          aria-label={t('navigation.primary')}
+          aria-label={t('common:navigation.primary')}
           sx={{ mt: 1 }}
         >
-          {tabs.map((item) => (
+          {items.map((item) => (
             <ListItemButton
               key={item.id}
-              component={Link}
-              to={`?tab=${item.id}`}
-              selected={item.id === tab}
-              aria-current={item.id === tab ? 'page' : undefined}
-              onClick={() => setMenuOpen(false)}
+              selected={item.id === activeId}
+              aria-current={item.id === activeId ? 'page' : undefined}
+              onClick={() => selectItem(item.id)}
               sx={{
                 borderRadius: 2,
                 mb: 0.75,
@@ -88,39 +125,15 @@ const UserNavigation = ({ tabs, tab, onSelect }: UserNavigationProps) => {
           ))}
         </List>
       </Box>
-      <Box
-        sx={{ mt: 'auto', p: 2, bgcolor: 'action.hover', borderRadius: 2.5 }}
-      >
-        <MdSchool size={24} />
-        <Typography sx={{ fontWeight: 700, mt: 1 }}>
-          {t('navigation.teamTitle')}
-        </Typography>
-        <Typography
-          variant="body2"
-          color="text.secondary"
-          sx={{ mt: 0.5, fontSize: 13 }}
-        >
-          {t('navigation.teamDescription')}
-        </Typography>
-        <Button
-          size="small"
-          onClick={() => {
-            onSelect('team')
-            setMenuOpen(false)
-          }}
-          sx={{ mt: 1, p: 0 }}
-        >
-          {t('navigation.openTeam')}
-        </Button>
-      </Box>
+
       <Button
         component={Link}
         to="/"
         color="inherit"
         startIcon={<MdArrowBack />}
-        sx={{ justifyContent: 'flex-start' }}
+        sx={{ mt: 'auto', justifyContent: 'flex-start' }}
       >
-        {t('navigation.home')}
+        {t('common:navigation.home')}
       </Button>
     </Stack>
   )
@@ -129,8 +142,8 @@ const UserNavigation = ({ tabs, tab, onSelect }: UserNavigationProps) => {
     <Box
       sx={{
         display: 'flex',
-        width: 1,
-        height: 1,
+        width: '100vw',
+        height: '100dvh',
         minHeight: 0,
         bgcolor: 'background.default',
       }}
@@ -138,7 +151,7 @@ const UserNavigation = ({ tabs, tab, onSelect }: UserNavigationProps) => {
       <Box
         component="aside"
         sx={{
-          width: 250,
+          width: 280,
           flexShrink: 0,
           display: { xs: 'none', md: 'block' },
           borderRight: 1,
@@ -149,6 +162,7 @@ const UserNavigation = ({ tabs, tab, onSelect }: UserNavigationProps) => {
       >
         {navigation}
       </Box>
+
       <Drawer
         open={menuOpen}
         onClose={() => setMenuOpen(false)}
@@ -164,20 +178,21 @@ const UserNavigation = ({ tabs, tab, onSelect }: UserNavigationProps) => {
       >
         {navigation}
       </Drawer>
+
       <Stack sx={{ flex: 1, minWidth: 0, minHeight: 0 }}>
         <Stack
           component="header"
           direction="row"
           sx={{
+            minHeight: 68,
             px: { xs: 2, md: 4 },
-            py: 1.5,
             gap: 1,
             alignItems: 'center',
             bgcolor: 'background.paper',
           }}
         >
           <IconButton
-            aria-label={t('navigation.open')}
+            aria-label={t('common:navigation.open')}
             aria-expanded={menuOpen}
             onClick={() => setMenuOpen(true)}
             sx={{ display: { md: 'none' } }}
@@ -185,11 +200,12 @@ const UserNavigation = ({ tabs, tab, onSelect }: UserNavigationProps) => {
             <MdMenu />
           </IconButton>
           <Typography sx={{ fontSize: 14, color: 'text.secondary', flex: 1 }}>
-            {t(`common:navigation.tabs.${tab}`)}
+            {t(`common:navigation.tabs.${activeId}`)}
           </Typography>
           <PlatformControls />
         </Stack>
         <Divider />
+
         <Box
           component="main"
           sx={{
@@ -200,25 +216,13 @@ const UserNavigation = ({ tabs, tab, onSelect }: UserNavigationProps) => {
             pb: 'max(24px, var(--safe-bottom))',
           }}
         >
-          <TabContext value={tab}>
-            {tabs.map((item) => (
-              <TabPanel
-                key={item.id}
-                value={item.id}
-                keepMounted
-                role="region"
-                aria-label={t(`common:navigation.tabs.${item.id}`)}
-                aria-labelledby={undefined}
-                sx={{ p: 0, maxWidth: 1200, mx: 'auto' }}
-              >
-                {item.component}
-              </TabPanel>
-            ))}
-          </TabContext>
+          <Box sx={{ width: 1, maxWidth: 1440, mx: 'auto' }}>
+            {activeItem.component}
+          </Box>
         </Box>
       </Stack>
     </Box>
   )
 }
 
-export default UserNavigation
+export default WorkspaceLayout
