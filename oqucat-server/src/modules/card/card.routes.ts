@@ -15,6 +15,7 @@ import {
   createClarificationSchema,
   createProjectCardSchema,
   listProjectCardsSchema,
+  publishCardSchema,
   updateCardFieldsSchema,
   updateCardTagsSchema,
   updateClarificationSchema,
@@ -22,6 +23,7 @@ import {
 } from './card.schemas'
 import { createCardSnapshot, findOwnedCard, serializeCard } from './card.utils'
 import { cardAiRouter } from './cardAi.routes'
+import { sameCardContent } from './cardContent'
 import { ProjectCard } from './ProjectCard.model'
 import { ProjectCardField } from './ProjectCardField.model'
 import { ProjectCardReview } from './ProjectCardReview.model'
@@ -191,7 +193,67 @@ r.patch(
       return res.status(404).json({ message: 'owned_card_not_found' })
     }
 
-    await card.update(req.body)
+    if (![CardStatus.DRAFT, CardStatus.PUBLISHED].includes(card.status)) {
+      return res.status(409).json({ message: 'card_not_editable' })
+    }
+    const { fields, tag_ids: requestedTagIds, ...cardData } = req.body
+    const tagIds =
+      requestedTagIds === undefined
+        ? undefined
+        : await validateTagIds(requestedTagIds)
+    if (tagIds === null) {
+      return res.status(400).json({ message: 'invalid_tags' })
+    }
+    if (
+      fields &&
+      new Set(fields.map(({ key }) => key)).size !== fields.length
+    ) {
+      return res.status(400).json({ message: 'duplicate_field_keys' })
+    }
+    const updated = await sequelize.transaction(async (transaction) => {
+      await card.reload({ transaction, lock: transaction.LOCK.UPDATE })
+      if (![CardStatus.DRAFT, CardStatus.PUBLISHED].includes(card.status)) {
+        return false
+      }
+      const before = await createCardSnapshot(card, transaction)
+      await card.update(cardData, { transaction })
+      if (fields) {
+        await ProjectCardField.destroy({
+          where: { card_id: card.id },
+          transaction,
+        })
+        await ProjectCardField.bulkCreate(
+          fields.map((field) => ({
+            ...field,
+            value: field.value ?? null,
+            card_id: card.id,
+          })),
+          { transaction }
+        )
+      }
+      if (tagIds) {
+        await ProjectCardTag.destroy({
+          where: { card_id: card.id },
+          transaction,
+        })
+        await ProjectCardTag.bulkCreate(
+          tagIds.map((tag_id) => ({ card_id: card.id, tag_id })),
+          { transaction }
+        )
+      }
+      if (
+        !sameCardContent(before, await createCardSnapshot(card, transaction))
+      ) {
+        await card.update(
+          { completeness_score: 0, reward_points: 0 },
+          { transaction }
+        )
+      }
+      return true
+    })
+    if (!updated) {
+      return res.status(409).json({ message: 'card_not_editable' })
+    }
     return res.json(await serializeCard(card))
   }
 )
@@ -207,12 +269,20 @@ r.put(
       return res.status(404).json({ message: 'owned_card_not_found' })
     }
 
+    if (![CardStatus.DRAFT, CardStatus.PUBLISHED].includes(card.status)) {
+      return res.status(409).json({ message: 'card_not_editable' })
+    }
     const tagIds = await validateTagIds(req.body.tag_ids)
     if (!tagIds) {
       return res.status(400).json({ message: 'invalid_tags' })
     }
 
-    await sequelize.transaction(async (transaction) => {
+    const updated = await sequelize.transaction(async (transaction) => {
+      await card.reload({ transaction, lock: transaction.LOCK.UPDATE })
+      if (![CardStatus.DRAFT, CardStatus.PUBLISHED].includes(card.status)) {
+        return false
+      }
+      const before = await createCardSnapshot(card, transaction)
       await ProjectCardTag.destroy({
         where: { card_id: card.id },
         transaction,
@@ -221,7 +291,19 @@ r.put(
         tagIds.map((tagId) => ({ card_id: card.id, tag_id: tagId })),
         { transaction }
       )
+      if (
+        !sameCardContent(before, await createCardSnapshot(card, transaction))
+      ) {
+        await card.update(
+          { completeness_score: 0, reward_points: 0 },
+          { transaction }
+        )
+      }
+      return true
     })
+    if (!updated) {
+      return res.status(409).json({ message: 'card_not_editable' })
+    }
     return res.json(await serializeCard(card))
   }
 )
@@ -235,6 +317,9 @@ r.put(
     if (!card) {
       return res.status(404).json({ message: 'owned_card_not_found' })
     }
+    if (![CardStatus.DRAFT, CardStatus.PUBLISHED].includes(card.status)) {
+      return res.status(409).json({ message: 'card_not_editable' })
+    }
     if (
       new Set(req.body.fields.map(({ key }) => key)).size !==
       req.body.fields.length
@@ -242,7 +327,12 @@ r.put(
       return res.status(400).json({ message: 'duplicate_field_keys' })
     }
 
-    await sequelize.transaction(async (transaction) => {
+    const updated = await sequelize.transaction(async (transaction) => {
+      await card.reload({ transaction, lock: transaction.LOCK.UPDATE })
+      if (![CardStatus.DRAFT, CardStatus.PUBLISHED].includes(card.status)) {
+        return false
+      }
+      const before = await createCardSnapshot(card, transaction)
       await ProjectCardField.destroy({
         where: { card_id: card.id },
         transaction,
@@ -258,7 +348,19 @@ r.put(
         })),
         { transaction }
       )
+      if (
+        !sameCardContent(before, await createCardSnapshot(card, transaction))
+      ) {
+        await card.update(
+          { completeness_score: 0, reward_points: 0 },
+          { transaction }
+        )
+      }
+      return true
     })
+    if (!updated) {
+      return res.status(409).json({ message: 'card_not_editable' })
+    }
     return res.json(await serializeCard(card))
   }
 )
@@ -266,17 +368,50 @@ r.put(
 r.post(
   '/:cardId/publish',
   requireRole([UserRole.BUSINESS]),
-  validateRequest(cardParamsSchema),
+  validateRequest(publishCardSchema),
   async (req, res) => {
     const card = await findOwnedCard(req.params.cardId, req.user.id)
     if (!card) {
       return res.status(404).json({ message: 'owned_card_not_found' })
     }
 
-    await card.update({
-      status: CardStatus.PUBLISHED,
-      published_at: card.published_at ?? new Date(),
+    const result = await sequelize.transaction(async (transaction) => {
+      await card.reload({ transaction, lock: transaction.LOCK.UPDATE })
+      if (![CardStatus.DRAFT, CardStatus.PUBLISHED].includes(card.status)) {
+        return 'card_not_editable'
+      }
+      const review = await ProjectCardReview.findOne({
+        where: { card_id: card.id, reviewed_at: { [Op.ne]: null } },
+        order: [['reviewed_at', 'DESC']],
+        transaction,
+      })
+      if (
+        !review?.rating ||
+        review.id !== req.body.review_id ||
+        card.completeness_score !==
+          Object.values(review.rating).reduce(
+            (sum, item) => sum + item.points,
+            0
+          ) ||
+        !sameCardContent(
+          review.card_copy,
+          await createCardSnapshot(card, transaction)
+        )
+      ) {
+        return 'card_review_required'
+      }
+      await card.update(
+        {
+          status: CardStatus.PUBLISHED,
+          published_at: card.published_at ?? new Date(),
+        },
+        { transaction }
+      )
+      return null
     })
+    if (result) {
+      return res.status(409).json({ message: result })
+    }
     return res.json(await serializeCard(card))
   }
 )
@@ -382,11 +517,31 @@ r.get(
       return res.status(403).json({ message: 'forbidden' })
     }
 
+    const snapshot = await createCardSnapshot(card)
+    const reviews = await ProjectCardReview.findAll({
+      where: { card_id: card.id },
+      order: [
+        ['reviewed_at', 'DESC NULLS LAST'],
+        ['createdAt', 'DESC'],
+      ],
+    })
     return res.json(
-      await ProjectCardReview.findAll({
-        where: { card_id: card.id },
-        order: [['createdAt', 'DESC']],
-      })
+      reviews.map((review) => ({
+        id: review.id,
+        card_id: review.card_id,
+        card_copy: review.card_copy,
+        rating: review.rating,
+        reviewed_at: review.reviewed_at,
+        is_current:
+          review.id === reviews.find((item) => item.reviewed_at)?.id &&
+          Boolean(review.rating) &&
+          card.completeness_score ===
+            Object.values(review.rating ?? {}).reduce(
+              (sum, item) => sum + item.points,
+              0
+            ) &&
+          sameCardContent(review.card_copy, snapshot),
+      }))
     )
   }
 )
@@ -404,7 +559,10 @@ r.post(
     const review = await ProjectCardReview.create({
       card_id: card.id,
       requested_by: req.user.id,
-      card_copy: await createCardSnapshot(card),
+      card_copy: {
+        ...(await createCardSnapshot(card)),
+        language: req.user.locale,
+      },
     })
     review.requester = req.user
 

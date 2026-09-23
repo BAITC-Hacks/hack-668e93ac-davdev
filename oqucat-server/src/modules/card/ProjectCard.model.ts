@@ -107,7 +107,7 @@ export class ProjectCard extends Model<
   @Default(0)
   @Column({
     type: DataType.SMALLINT,
-    comment: 'Highest completeness score from all AI reviews of this card',
+    comment: 'Completeness score of the current card content',
     validate: { min: 0, max: 100 },
   })
   declare completeness_score: number

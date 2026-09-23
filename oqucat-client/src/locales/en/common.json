@@ -364,6 +364,7 @@
       "onboarding": "Account setup"
     },
     "tabs": {
+      "cards": "My project cards",
       "tasks": "Tasks",
       "team": "My team",
       "responses": "My applications",

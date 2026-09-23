@@ -20,13 +20,73 @@ const editableCardFields = {
   creation_method: z.enum(CardCreationMethod).optional(),
 }
 
-export const projectCardFieldSchema = z.object({
-  key: z.string().trim().min(1).max(100),
-  label: z.string().trim().min(1).max(200),
-  value: z.json().optional(),
-  field_type: z.enum(DynamicFieldType).optional(),
-  position: z.number().int().min(0).optional(),
-})
+export const projectCardFieldSchema = z
+  .object({
+    key: z.string().trim().min(1).max(100),
+    label: z.string().trim().min(1).max(200),
+    value: z.json().optional(),
+    field_type: z.enum(DynamicFieldType).optional(),
+    position: z.number().int().min(0).optional(),
+  })
+  .superRefine(({ field_type = DynamicFieldType.TEXT, value }, context) => {
+    if (value === undefined || value === null) {
+      return
+    }
+    const textTypes = [
+      DynamicFieldType.TEXT,
+      DynamicFieldType.DATE,
+      DynamicFieldType.URL,
+    ]
+    const valid =
+      field_type === DynamicFieldType.JSON ||
+      (field_type === DynamicFieldType.NUMBER &&
+        typeof value === 'number' &&
+        Number.isFinite(value)) ||
+      (field_type === DynamicFieldType.BOOLEAN && typeof value === 'boolean') ||
+      (textTypes.includes(field_type) &&
+        typeof value === 'string' &&
+        value.length <= 10_000)
+    if (!valid) {
+      context.addIssue({
+        code: 'custom',
+        message: 'Value does not match field type',
+        path: ['value'],
+      })
+    }
+  })
+  .superRefine(({ field_type, value }, context) => {
+    if (
+      field_type === DynamicFieldType.URL &&
+      typeof value === 'string' &&
+      value
+    ) {
+      try {
+        if (!['http:', 'https:'].includes(new URL(value).protocol)) {
+          throw new Error('invalid_url')
+        }
+      } catch {
+        context.addIssue({
+          code: 'custom',
+          message: 'Invalid HTTP URL',
+          path: ['value'],
+        })
+      }
+    }
+    if (
+      field_type === DynamicFieldType.DATE &&
+      typeof value === 'string' &&
+      value &&
+      (!/^\d{4}-\d{2}-\d{2}$/u.test(value) ||
+        !Number.isFinite(Date.parse(value)) ||
+        new Date(value).toISOString().slice(0, 10) !== value)
+    ) {
+      context.addIssue({
+        code: 'custom',
+        message: 'Invalid date',
+        path: ['value'],
+      })
+    }
+  })
 
 export const createProjectCardSchema = {
   body: z.object({
@@ -47,11 +107,16 @@ export const createAiProjectCardSchema = {
 
 export const updateProjectCardSchema = {
   params: z.object({ cardId: z.uuid() }),
-  body: z.object(editableCardFields).partial(),
+  body: createProjectCardSchema.body.partial(),
 }
 
 export const cardParamsSchema = {
   params: z.object({ cardId: z.uuid() }),
+}
+
+export const publishCardSchema = {
+  params: cardParamsSchema.params,
+  body: z.object({ review_id: z.uuid(), confirmed: z.literal(true) }),
 }
 
 export const listProjectCardsSchema = {

@@ -1,3 +1,4 @@
+import type { Transaction } from 'sequelize'
 import { z } from 'zod'
 
 import type { UserID } from '../../types/UserId'
@@ -20,10 +21,14 @@ export const findOwnedCard = async (cardId: string, ownerId: UserID) => {
   return ProjectCard.findOne({ where: { id: cardId, company_id: company.id } })
 }
 
-export const serializeCard = async (card: ProjectCard) => {
+export const serializeCard = async (
+  card: ProjectCard,
+  transaction?: Transaction
+) => {
   const [company, fields, cardTags] = await Promise.all([
-    Company.findByPk(card.company_id),
+    Company.findByPk(card.company_id, { transaction }),
     ProjectCardField.findAll({
+      transaction,
       where: { card_id: card.id },
       order: [
         ['position', 'ASC'],
@@ -31,6 +36,7 @@ export const serializeCard = async (card: ProjectCard) => {
       ],
     }),
     ProjectCardTag.findAll({
+      transaction,
       where: { card_id: card.id },
       include: [Tag],
     }),
@@ -45,9 +51,10 @@ export const serializeCard = async (card: ProjectCard) => {
 }
 
 export const createCardSnapshot = async (
-  card: ProjectCard
+  card: ProjectCard,
+  transaction?: Transaction
 ): Promise<ProjectCardSnapshot> => {
-  const details = await serializeCard(card)
+  const details = await serializeCard(card, transaction)
   const serializedDetails = JSON.stringify(details)
   const parsedDetails: unknown = JSON.parse(serializedDetails)
   return projectCardSnapshotSchema.parse(parsedDetails)

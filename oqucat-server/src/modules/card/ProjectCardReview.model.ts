@@ -1,6 +1,4 @@
-import { Op, type SaveOptions } from 'sequelize'
 import {
-  AfterSave,
   AllowNull,
   BelongsTo,
   Column,
@@ -80,31 +78,4 @@ export class ProjectCardReview extends Model<
 
   @BelongsTo(() => User, 'requested_by')
   declare requester: User
-
-  @AfterSave
-  static async keepHighestCompleteness(
-    review: ProjectCardReview,
-    options: SaveOptions
-  ) {
-    if (!review.rating) {
-      return
-    }
-
-    const totalPoints = Object.values(review.rating).reduce(
-      (total, criterion) => total + criterion.points,
-      0
-    )
-    const completenessScore = Math.min(100, Math.max(0, totalPoints))
-
-    await ProjectCard.update(
-      { completeness_score: completenessScore },
-      {
-        transaction: options.transaction,
-        where: {
-          id: review.card_id,
-          completeness_score: { [Op.lt]: completenessScore },
-        },
-      }
-    )
-  }
 }
