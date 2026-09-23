@@ -361,7 +361,31 @@
       "chat": "Chat",
       "editor": "Editor",
       "notifications": "Notifications",
-      "welcome": "Welcome"
+      "welcome": "Welcome",
+      "role": "Choose role"
+    }
+  },
+  "onboarding": {
+    "title": "How will you use OquCat?",
+    "description": "Choose the account type that matches how you will participate.",
+    "permanent": "This choice is permanent. You will not be able to change your account type later.",
+    "success": "Your account type has been selected.",
+    "roles": {
+      "student": {
+        "title": "Student",
+        "description": "Join or create teams, apply to projects, complete challenges and earn points.",
+        "action": "Continue as a student"
+      },
+      "business": {
+        "title": "Business",
+        "description": "Publish project challenges, review team applications and evaluate completed work.",
+        "action": "Continue as a business"
+      }
+    },
+    "confirm": {
+      "title": "Confirm account type",
+      "description": "Choose {{role}}? This cannot be changed later.",
+      "action": "Confirm choice"
     }
   },
   "landing": {
@@ -452,8 +476,10 @@
     }
   },
   "roles": {
+    "unassigned": "Not selected",
+    "business": "Business",
     "superadmin": "Super Administrator",
-    "user": "User"
+    "user": "Student"
   },
   "weekdays": {
     "long": {

@@ -13,6 +13,7 @@ import {
   checkTauriNotificationPermission,
   requestTauriNotificationPermission,
 } from '@/notifications/tauri'
+import { UserRole } from '@/types/UserRole'
 import { isTauri } from '@/utils/isTauri'
 import logger from '@/utils/logger'
 
@@ -46,15 +47,17 @@ const NotificationsPrompt = () => {
     useState<NotificationPermission | null>(() =>
       isTauri ? checkTauriNotificationPermission() : null
     )
+  const hasAssignedRole =
+    Boolean(user?.role) && user?.role !== UserRole.UNASSIGNED
   const shouldPrompt =
-    Boolean(user?.role) &&
+    hasAssignedRole &&
     (isTauri
       ? tauriPermission !== null && tauriPermission !== 'granted'
       : isNotificationSupported && Notification.permission !== 'granted') &&
     !dismissed
 
   useEffect(() => {
-    if (!user?.role) {
+    if (!hasAssignedRole) {
       return
     }
 
@@ -66,7 +69,7 @@ const NotificationsPrompt = () => {
     if (isNotificationSupported && Notification.permission === 'granted') {
       void registerPushSafely()
     }
-  }, [user?.role])
+  }, [hasAssignedRole])
 
   const handleEnableNotifications = async () => {
     if (isTauri) {

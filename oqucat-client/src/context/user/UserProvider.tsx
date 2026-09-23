@@ -9,6 +9,7 @@ import { subscribeToWebMessages } from '@/notifications/web'
 import { playConversationSound } from '@/pages/common/chat/conversationSound'
 import type { Message } from '@/types/Chat'
 import { isLanguage } from '@/types/Languages'
+import { UserRole } from '@/types/UserRole'
 import { isTauri } from '@/utils/isTauri'
 import { notifyMessage } from '@/utils/notifications'
 
@@ -21,6 +22,7 @@ interface UserProviderProps {
 export const UserProvider = ({ children }: UserProviderProps) => {
   const { data } = useAuthSession()
   const user = data?.user
+  const activeUser = user?.role === UserRole.UNASSIGNED ? undefined : user
 
   const [unreadCount, setUnreadCount] = useState(0)
   const { i18n, t } = useTranslation()
@@ -34,7 +36,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
   }, [i18n, user?.locale])
 
   useEffect(() => {
-    const userId = user?.id
+    const userId = activeUser?.id
     if (!userId) {
       return
     }
@@ -51,14 +53,14 @@ export const UserProvider = ({ children }: UserProviderProps) => {
     }
 
     void fetchUnreadCount()
-  }, [user?.id])
+  }, [activeUser?.id])
 
-  const sio = useSocket(user)
+  const sio = useSocket(activeUser)
 
   useEffect(() => {
     let cleanup: (() => void) | undefined
 
-    if (sio && user) {
+    if (sio && activeUser) {
       let activeChatId: string | null = null
       const handleActiveChat = (event: Event) => {
         if ('detail' in event && typeof event.detail === 'string') {
@@ -68,7 +70,10 @@ export const UserProvider = ({ children }: UserProviderProps) => {
         }
       }
       const handleMessage = (message: Message) => {
-        if (message.to_id !== user.id || message.from_id === user.id) {
+        if (
+          message.to_id !== activeUser.id ||
+          message.from_id === activeUser.id
+        ) {
           return
         }
 
@@ -107,7 +112,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
     }
 
     return cleanup
-  }, [sio, t, user])
+  }, [activeUser, sio, t])
 
   useEffect(() => {
     let unsubscribe: (() => void) | undefined
@@ -136,7 +141,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
     <UserContext
       value={{
         sio,
-        unreadCount: user ? unreadCount : 0,
+        unreadCount: activeUser ? unreadCount : 0,
         setUnreadCount,
       }}
     >

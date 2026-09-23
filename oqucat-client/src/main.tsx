@@ -45,7 +45,7 @@ const router = createBrowserRouter([
       },
       {
         element: (
-          <WithAuth roles={[R.USER, R.SUPERADMIN]}>
+          <WithAuth roles={[R.UNASSIGNED, R.USER, R.BUSINESS, R.SUPERADMIN]}>
             <Dashboard />
           </WithAuth>
         ),

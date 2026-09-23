@@ -80,7 +80,7 @@ export const auth = betterAuth({
       role: {
         type: 'string',
         required: true,
-        defaultValue: UserRole.USER,
+        defaultValue: UserRole.UNASSIGNED,
       },
       company_id: {
         type: 'number',
@@ -229,9 +229,16 @@ export const auth = betterAuth({
       secretKey: cfg.CLOUDFLARE_SITE_SECRET,
     }),
     admin({
-      defaultRole: UserRole.USER,
+      defaultRole: UserRole.UNASSIGNED,
       adminRoles: [UserRole.SUPERADMIN],
       roles: {
+        [UserRole.UNASSIGNED]: {
+          statements: {},
+          authorize: () => ({
+            success: false,
+            error: 'Role assignment required',
+          }),
+        },
         [UserRole.USER]: {
           statements: {},
           authorize: () => ({

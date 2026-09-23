@@ -7,14 +7,18 @@ import { useAuthSession } from '@/auth/betterAuth.ts'
 import { UserRole as R } from '@/types/UserRole.ts'
 
 const gates: Record<R, LazyExoticComponent<() => JSX.Element | null>> = {
+  [R.UNASSIGNED]: lazy(() => import('@/pages/onboarding/AllTabsOnboarding')),
   [R.USER]: lazy(() => import('@/pages/user/AllTabsUser')),
+  [R.BUSINESS]: lazy(() => import('@/pages/business/AllTabsBusiness')),
   [R.SUPERADMIN]: lazy(
     () => import('@/pages/superadmin/AllTabsSuperAdmin.tsx')
   ),
 }
 
 const namespaces: Record<R, string> = {
+  [R.UNASSIGNED]: 'common',
   [R.USER]: 'user',
+  [R.BUSINESS]: 'common',
   [R.SUPERADMIN]: 'superadmin',
 }
 

@@ -74,7 +74,7 @@ export class User extends Model<User, UserCreationAttributes> {
   declare image: string | null
 
   @AllowNull(false)
-  @Default(UserRole.USER)
+  @Default(UserRole.UNASSIGNED)
   @Column(DataType.STRING)
   declare role: UserRole
 
