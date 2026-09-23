@@ -1,18 +1,22 @@
+import Alert from '@mui/material/Alert'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
-import Paper from '@mui/material/Paper'
+import LinearProgress from '@mui/material/LinearProgress'
 import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import {
-  MdGroups,
-  MdPerson,
-  MdVerifiedUser,
-  MdArrowForward,
-} from 'react-icons/md'
-import { Link } from 'react-router-dom'
+import { MdGroups, MdPerson, MdVerifiedUser } from 'react-icons/md'
+import { useSearchParams } from 'react-router-dom'
 
-import DemoNotice from '@/components/DemoNotice'
+import { queryKeys } from '@/api/http/QueryKeys'
+import { createStudentProfile, getMyStudentProfile } from '@/api/http/students'
+import { getMyTeams, getTeam } from '@/api/http/teams'
+import { useAuthSession } from '@/auth/betterAuth'
+import { getMarketplaceError } from '@/utils/getMarketplaceError'
+
+import TeamContent from './TeamContent'
 
 const rules = [
   { id: 'captain', icon: MdVerifiedUser },
@@ -20,8 +24,77 @@ const rules = [
   { id: 'oneTeam', icon: MdGroups },
 ] as const
 
+const useTeamState = () => {
+  const { data: session } = useAuthSession()
+  const userId = session?.user?.id
+  const [params] = useSearchParams()
+  const active = params.get('tab') === 'team'
+  const client = useQueryClient()
+  const [selectedId, setSelectedId] = useState('')
+  const [editing, setEditing] = useState(false)
+  const memberships = useQuery({
+    queryKey: queryKeys.myTeams(userId),
+    queryFn: ({ signal }) => getMyTeams(signal),
+    enabled: Boolean(userId) && active,
+    retry: false,
+  })
+  const profile = useQuery({
+    queryKey: queryKeys.studentProfile(userId),
+    queryFn: ({ signal }) => getMyStudentProfile(signal),
+    enabled: Boolean(userId) && active,
+    retry: false,
+  })
+  const joined = (memberships.data ?? []).filter(
+    (member) => member.status === 'accepted' && member.team
+  )
+  const teamId = joined.some((member) => member.team_id === selectedId)
+    ? selectedId
+    : joined.length === 1
+      ? joined[0].team_id
+      : ''
+  const details = useQuery({
+    queryKey: queryKeys.team(userId, teamId),
+    queryFn: ({ signal }) => getTeam(teamId, signal),
+    enabled: Boolean(userId && teamId) && active && memberships.isSuccess,
+    retry: false,
+  })
+  const initialize = useMutation({
+    mutationFn: createStudentProfile,
+    onSuccess: async () => {
+      await client.invalidateQueries({
+        queryKey: queryKeys.marketplace(userId),
+      })
+    },
+  })
+  const error = memberships.error ?? profile.error
+  const ready = memberships.isSuccess && profile.isSuccess
+  const team = details.isSuccess ? details.data.team : undefined
+  const captain = team?.captain_id === userId
+
+  return {
+    userId,
+    memberships,
+    profile,
+    error,
+    ready,
+    teamId,
+    joined,
+    details,
+    initialize,
+    captain,
+    team,
+    editing,
+    setEditing,
+    setSelectedId,
+  }
+}
+
+type TeamState = ReturnType<typeof useTeamState>
+
 const Team = () => {
   const { t } = useTranslation('user')
+  const state = useTeamState()
+  const { memberships, profile, error, ready } = state
 
   return (
     <Stack spacing={3}>
@@ -39,51 +112,28 @@ const Team = () => {
           {t('team.subtitle')}
         </Typography>
       </Box>
-      <DemoNotice />
-      <Paper
-        variant="outlined"
-        sx={{ p: { xs: 3, md: 6 }, borderRadius: 3, textAlign: 'center' }}
-      >
-        <Box
-          sx={{
-            display: 'inline-flex',
-            p: 3,
-            bgcolor: 'action.hover',
-            borderRadius: '50%',
-            mb: 3,
-          }}
+      {(memberships.isFetching || profile.isFetching) && (
+        <LinearProgress aria-label={t('marketplace.loading')} />
+      )}
+      {error && (
+        <Alert
+          severity="error"
+          action={
+            <Button
+              color="inherit"
+              onClick={() => {
+                void memberships.refetch()
+                void profile.refetch()
+              }}
+            >
+              {t('marketplace.retry')}
+            </Button>
+          }
         >
-          <MdGroups size={48} />
-        </Box>
-        <Typography component="h2" variant="h5" sx={{ fontWeight: 700 }}>
-          {t('team.emptyTitle')}
-        </Typography>
-        <Typography
-          color="text.secondary"
-          sx={{ maxWidth: 520, mx: 'auto', mt: 2, mb: 3, lineHeight: 1.8 }}
-        >
-          {t('team.emptyDescription')}
-        </Typography>
-        <Button variant="contained" size="large" disabled>
-          {t('team.create')}
-        </Button>
-        <Typography
-          variant="caption"
-          component="p"
-          color="text.secondary"
-          sx={{ mt: 1.5 }}
-        >
-          {t('demo.unavailable')}
-        </Typography>
-        <Button
-          component={Link}
-          to="?tab=tasks"
-          endIcon={<MdArrowForward />}
-          sx={{ mt: 2 }}
-        >
-          {t('team.explore')}
-        </Button>
-      </Paper>
+          {getMarketplaceError(error)}
+        </Alert>
+      )}
+      {ready && <TeamContent state={state} />}
       <Box
         sx={{
           display: 'grid',
@@ -108,3 +158,4 @@ const Team = () => {
 }
 
 export default Team
+export type { TeamState }

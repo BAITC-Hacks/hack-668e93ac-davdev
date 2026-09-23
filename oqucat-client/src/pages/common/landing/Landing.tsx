@@ -12,6 +12,7 @@ import PlatformBrand from '@/components/PlatformBrand'
 
 import LandingAudience from './LandingAudience'
 import LandingHeader from './LandingHeader'
+import LandingHero from './LandingHero'
 import LandingPreview from './LandingPreview'
 
 const steps = ['brief', 'team', 'work', 'result'] as const
@@ -30,104 +31,7 @@ const Landing = () => {
     >
       <LandingHeader />
       <Box component="main">
-        <Container
-          maxWidth="lg"
-          component="section"
-          sx={{ py: { xs: 6, md: 10 } }}
-        >
-          <Box
-            sx={{
-              display: 'grid',
-              gridTemplateColumns: { xs: '1fr', md: '1.1fr 1fr' },
-              gap: { xs: 5, md: 7 },
-              alignItems: 'center',
-            }}
-          >
-            <Box>
-              <Stack
-                direction="row"
-                spacing={1}
-                sx={{ alignItems: 'center', mb: 3 }}
-              >
-                <Box
-                  sx={{
-                    width: 8,
-                    height: 8,
-                    bgcolor: 'primary.main',
-                    borderRadius: '50%',
-                  }}
-                />
-                <Typography
-                  sx={{
-                    textTransform: 'uppercase',
-                    fontSize: 12,
-                    fontWeight: 700,
-                    letterSpacing: '0.1em',
-                  }}
-                >
-                  {t('landing.hero.eyebrow')}
-                </Typography>
-              </Stack>
-              <Typography
-                component="h1"
-                sx={{
-                  fontSize: { xs: 42, sm: 58, lg: 68 },
-                  fontWeight: 700,
-                  lineHeight: 1.06,
-                  letterSpacing: '-0.045em',
-                }}
-              >
-                {t('landing.hero.title')}
-                <Box
-                  component="span"
-                  sx={(theme) => ({
-                    display: 'block',
-                    color: 'primary.dark',
-                    ...theme.applyStyles('dark', { color: 'primary.light' }),
-                  })}
-                >
-                  {t('landing.hero.accent')}
-                </Box>
-              </Typography>
-              <Typography
-                color="text.secondary"
-                sx={{ fontSize: 18, mt: 3, maxWidth: 470, lineHeight: 1.8 }}
-              >
-                {t('landing.hero.description')}
-              </Typography>
-              <Stack
-                direction={{ xs: 'column', sm: 'row' }}
-                spacing={1.5}
-                sx={{ mt: 4 }}
-              >
-                <Button
-                  component={Link}
-                  to="/login"
-                  variant="contained"
-                  size="large"
-                  disableElevation
-                  endIcon={<MdArrowForward />}
-                  sx={{ borderRadius: 2, py: 1.5 }}
-                >
-                  {t('landing.hero.student')}
-                </Button>
-                <Button
-                  href="#business"
-                  variant="outlined"
-                  color="inherit"
-                  size="large"
-                  sx={{ borderRadius: 2, py: 1.5 }}
-                >
-                  {t('landing.hero.business')}
-                </Button>
-              </Stack>
-              <Typography variant="body2" color="text.secondary" sx={{ mt: 2 }}>
-                {t('landing.hero.note')}
-              </Typography>
-            </Box>
-            <LandingPreview />
-          </Box>
-        </Container>
+        <LandingHero />
         <Container maxWidth="lg">
           <Box
             sx={{
@@ -158,6 +62,47 @@ const Landing = () => {
           </Box>
         </Container>
         <LandingAudience />
+        <Container
+          maxWidth="lg"
+          component="section"
+          sx={{ pb: { xs: 7, md: 10 } }}
+        >
+          <Box
+            sx={{
+              display: 'grid',
+              gridTemplateColumns: { xs: '1fr', md: '1fr 1fr' },
+              gap: 5,
+              alignItems: 'center',
+            }}
+          >
+            <Box>
+              <Typography variant="overline" color="text.secondary">
+                {t('landing.vasya.guide')}
+              </Typography>
+              <Typography
+                component="h2"
+                sx={{
+                  fontSize: { xs: 30, md: 42 },
+                  fontWeight: 700,
+                  lineHeight: 1.15,
+                  mt: 1,
+                }}
+              >
+                {t('landing.vasya.projectTitle')}
+              </Typography>
+              <Typography
+                color="text.secondary"
+                sx={{ mt: 2, lineHeight: 1.8 }}
+              >
+                {t('landing.vasya.projectDescription')}
+              </Typography>
+              <Button href="#how" endIcon={<MdArrowForward />} sx={{ mt: 3 }}>
+                {t('landing.nav.how')}
+              </Button>
+            </Box>
+            <LandingPreview />
+          </Box>
+        </Container>
         <Box
           component="section"
           id="how"

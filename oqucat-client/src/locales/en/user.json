@@ -95,17 +95,28 @@
     "cta": {
       "title": "Your next project starts with a first step",
       "description": "Join the platform to turn knowledge and ideas into useful solutions."
+    },
+    "vasya": {
+      "title": "Hi, I'm Vasily.",
+      "accent": "Let's make something useful.",
+      "description": "Meet OquCat, where student teams find business challenges and turn their ideas into real projects.",
+      "scene": "Vasily, the 3D cat and your OquCat guide",
+      "loading": "Loading Vasily",
+      "caption": "Your guide from idea to project",
+      "guide": "Vasily explains",
+      "projectTitle": "How an idea becomes a project",
+      "projectDescription": "A business has a challenge. A team has a fresh perspective. Here is an example of how they meet on OquCat."
     }
   },
   "tasks": {
     "eyebrow": "Practice starts here",
     "title": "Find a challenge for your team",
-    "subtitle": "Explore sample projects, expected outcomes and working arrangements.",
-    "search": "Search by title, description or company",
+    "subtitle": "Explore business tasks, expected outcomes and working arrangements.",
+    "search": "Search task titles and descriptions",
     "sort": "Sort by",
     "sortDefault": "Default order",
     "sortPoints": "Highest points first",
-    "found": "Examples found: {{count}}",
+    "found": "Tasks found: {{count}}",
     "duration": "Duration: {{count}} wk.",
     "points": "{{count}} points",
     "details": "View details",
@@ -113,7 +124,7 @@
     "empty": "No matches found",
     "emptyDescription": "Try another title or clear your search.",
     "clear": "Clear search",
-    "notFound": "This example task does not exist",
+    "notFound": "Task not found",
     "reward": "Completion points",
     "teamOnly": "Apply as a team",
     "teamRule": "The captain submits the idea. A team of one student can also participate.",
@@ -128,7 +139,17 @@
       "success": "Success criteria",
       "contact": "Contact",
       "interaction": "Working arrangements"
-    }
+    },
+    "find": "Search",
+    "sortCompleteness": "Most complete first",
+    "sortNewest": "Newest first",
+    "noPublished": "No published tasks yet",
+    "firstPage": "Go to first page",
+    "pagination": "Task catalogue pages",
+    "completeness": "Description completeness: {{value}}%",
+    "closed": "Applications for this task are closed.",
+    "captainOnly": "Create a team or ask its captain to apply.",
+    "alreadyApplied": "Your team has already applied to this task."
   },
   "examples": {
     "booking": {
@@ -179,7 +200,7 @@
     "title": "My team",
     "subtitle": "A space for your team and shared projects.",
     "emptyTitle": "Your team will be here",
-    "emptyDescription": "In a later stage, you will be able to create a team with a name, description and logo, then invite members.",
+    "emptyDescription": "Create a team with a name and an optional logo URL, then invite members.",
     "create": "Create a team",
     "explore": "Explore tasks",
     "rules": {
@@ -195,26 +216,67 @@
         "title": "One active team",
         "description": "In the first version, a student can belong to only one active team."
       }
+    },
+    "edit": "Edit team",
+    "name": "Team name",
+    "nameHint": "2–120 characters",
+    "logo": "Logo URL",
+    "logoHint": "Optional. The URL must start with http:// or https://.",
+    "members": "Members",
+    "captain": "Captain",
+    "leave": "Leave team",
+    "remove": "Remove member",
+    "revoke": "Cancel invitation",
+    "removeConfirm": "Remove “{{name}}” or their invitation from this team?",
+    "invitations": "Team invitations",
+    "oneTeamHint": "To accept an invitation, you need a student profile and must not belong to another active team.",
+    "accept": "Accept",
+    "decline": "Decline",
+    "invite": "Invite",
+    "invited": "Invitation sent",
+    "studentId": "Student ID",
+    "studentIdHint": "Ask the student to copy their ID from the team page (UUIDv7).",
+    "invitationConfirm": "Confirm your response to the invitation from “{{name}}”?",
+    "choose": "Choose a team",
+    "myId": "Your ID: {{id}}",
+    "captainName": "Captain: {{name}}",
+    "profileRequired": "Create a student profile",
+    "profileDescription": "A profile is required to create a team or accept invitations.",
+    "createProfile": "Create student profile",
+    "memberStatus": {
+      "pending": "Invited",
+      "accepted": "Joined",
+      "declined": "Declined"
     }
   },
   "responses": {
     "eyebrow": "From idea to project",
     "title": "My applications",
-    "subtitle": "Your team’s proposals and business decisions will appear here.",
+    "subtitle": "Your team's proposals and business decisions.",
     "emptyTitle": "Your first proposal is ahead",
-    "emptyDescription": "Choose a task and discuss an idea with your team. Once applications are available, the captain can submit a proposal on its behalf.",
+    "emptyDescription": "Choose a task and discuss an idea with your team. The captain can submit a proposal on its behalf.",
     "explore": "Explore tasks",
     "processTitle": "How applications work",
     "steps": {
       "idea": "The captain describes the idea and attaches the team’s materials.",
       "review": "The business reviews the proposal and team members, then makes a decision.",
       "result": "The selected team discusses details and starts working."
-    }
+    },
+    "edit": "Edit application",
+    "idea": "Idea",
+    "plan": "Implementation plan",
+    "prototype": "Prototype URL",
+    "prototypeHint": "A URL starting with http:// or https:// is required.",
+    "submit": "Submit application",
+    "withdraw": "Withdraw application",
+    "withdrawConfirm": "Withdraw this application? This team will not be able to apply to the same task again.",
+    "materials": "Application materials",
+    "cardUnavailable": "Task unavailable"
   },
   "rankings": {
     "eyebrow": "Results matter",
     "title": "Rankings",
-    "subtitle": "Separate student and team rankings based on completed tasks.",
+    "subtitle": "Up to 100 students and teams with the most points.",
     "switch": "Ranking type",
     "students": "Students",
     "teams": "Teams",
@@ -224,7 +286,7 @@
     "completed": "Completed",
     "points": "Points",
     "aboutTitle": "Grow with your team",
-    "about": "Under the project rules, completing a task awards points to every student on the team and to the shared team account. The entries shown here are fictional examples.",
+    "about": "Student and team points are shown alongside average ratings from business reviews.",
     "names": {
       "students": {
         "first": "Aliya K.",
@@ -236,6 +298,57 @@
         "second": "Impulse",
         "third": "Vector"
       }
-    }
+    },
+    "rating": "Rating",
+    "noRating": "No reviews",
+    "empty": "No ranked participants yet"
+  },
+  "marketplace": {
+    "loading": "Loading",
+    "retry": "Retry",
+    "confirm": "Confirm",
+    "notSpecified": "Not specified",
+    "yes": "Yes",
+    "no": "No"
+  },
+  "apiErrors": {
+    "generic": "The action could not be completed. Please try again.",
+    "network_error": "The server is unavailable. Check your connection and try again.",
+    "authorization_required": "Sign in to continue.",
+    "forbidden": "You do not have permission for this action.",
+    "too_many_requests": "Too many requests. Please try again later.",
+    "validation_error": "Check the form fields.",
+    "already_in_team": "You already belong to a team. Leave it first.",
+    "student_profile_required": "Create a student profile on the team page first.",
+    "student_profile_not_found": "Student profile not found.",
+    "account_is_business": "This action requires a student account.",
+    "team_not_found": "Team not found.",
+    "captain_required": "Only the captain can perform this action.",
+    "captain_already_member": "The captain is already a team member.",
+    "team_member_already_exists": "This student has already joined or been invited to this team.",
+    "invitation_not_found": "This invitation is no longer available.",
+    "captain_cannot_leave": "The captain cannot leave their team.",
+    "team_member_not_found": "Team member not found.",
+    "card_not_open": "This task no longer accepts applications.",
+    "card_not_found": "Task not found.",
+    "application_already_exists": "Your team has already applied to this task.",
+    "application_not_found": "Application not found.",
+    "application_cannot_edit": "This application can no longer be edited.",
+    "application_cannot_withdraw": "This application can no longer be withdrawn."
+  },
+  "cardStatus": {
+    "draft": "Draft",
+    "published": "Accepting applications",
+    "in_progress": "In progress",
+    "completed": "Completed",
+    "cancelled": "Cancelled"
+  },
+  "applicationStatus": {
+    "pending": "Under review",
+    "interested": "Interested",
+    "accepted": "Accepted",
+    "rejected": "Rejected",
+    "withdrawn": "Withdrawn",
+    "completed": "Completed"
   }
 }
