@@ -1,0 +1,60 @@
+{
+  "telegram": {
+    "unbind": "Your Telegram account has been unlinked",
+    "yourCode": "Your temporary login code",
+    "valid": "It is valid for 5 minutes",
+    "alreadyLinked": "Your Telegram account is already linked.",
+    "linked": "Your Telegram account has been linked to {{appName}}. ({{email}})",
+    "greeting": "Hello, {{name}}! 👋",
+    "defaultUser": "user",
+    "linkInstructions": "To link your account, choose one of the following methods:",
+    "method1": "1️⃣ Tap the button below and sign in to {{appName}}:",
+    "method2": "2️⃣ Enter the following code on the \"Profile\" page:",
+    "openApplication": "Open application",
+    "unexpectedError": "An unexpected error occurred. Please try again."
+  },
+  "notifications": {
+    "newMessageFrom": "New message from {{name}}"
+  },
+  "email": {
+    "adminRegistration": {
+      "credentials": "Use the following login details:",
+      "description": "A {{company}} company administrator account has been created for you.",
+      "email": "Email address",
+      "fallback": "If the button doesn't work, copy and open the following link in your browser:",
+      "login": "Open {{app}}",
+      "password": "Temporary password",
+      "security": "For security reasons, we recommend changing your password after your first login.",
+      "subject": "Your {{app}} administrator account",
+      "title": "Welcome to {{app}}"
+    },
+    "confirmation": {
+      "confirm": "Confirm email address",
+      "description": "Please click the button below to confirm your email address and complete your registration.",
+      "fallback": "If the button doesn't work, copy and open the following link in your browser:",
+      "ignore": "If you did not request an account, you can safely ignore this email.",
+      "subject": "Confirm your email address",
+      "title": "Confirm your email address"
+    },
+    "doctorRegistration": {
+      "credentials": "Use the following login details:",
+      "description": "A doctor account has been created for you at {{company}}.",
+      "email": "Email address",
+      "fallback": "If the button doesn't work, copy and open the following link in your browser:",
+      "login": "Log in to {{app}}",
+      "password": "Temporary password",
+      "security": "For security reasons, we recommend changing your password after your first login.",
+      "subject": "Your Aşyq Öкpe doctor account",
+      "title": "Your doctor account"
+    },
+    "passwordReset": {
+      "subject": "Reset your {{app}} password",
+      "title": "Password Reset",
+      "description": "We received a request to reset the password for your {{app}} account.",
+      "account": "Account: {{email}}",
+      "button": "Reset Password",
+      "fallback": "If the button doesn't work, copy and open the following link in your browser:",
+      "security": "If you did not request a password reset, simply ignore this email. Your current password will remain unchanged."
+    }
+  }
+}

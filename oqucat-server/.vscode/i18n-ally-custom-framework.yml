@@ -1,0 +1,11 @@
+languageIds:
+  - javascript
+  - typescript
+  - javascriptreact
+  - typescriptreact
+  - ejs
+
+usageMatchRegex:
+  - "\\bt\\(\\s*['\"`]({key})['\"`]"
+
+monopoly: true
