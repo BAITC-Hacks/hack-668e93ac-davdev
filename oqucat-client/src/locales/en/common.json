@@ -1,0 +1,502 @@
+{
+  "actions": {
+    "continue": "Continue",
+    "back": "Back",
+    "create": "Create",
+    "update": "Update",
+    "delete": "Delete",
+    "select": "Select",
+    "save": "Save",
+    "forget": "Forget",
+    "unlink": "Unlink",
+    "bind": "Connect",
+    "verifyCode": "Verify code",
+    "next": "Next",
+    "start": "Start",
+    "exit": "Exit",
+    "cancel": "Cancel",
+    "later": "Later",
+    "install": "Install",
+    "enable": "Turn on",
+    "return": "Return"
+  },
+  "loading": {
+    "holdToSpeedUp": "Hold down to speed up loading"
+  },
+  "assistant": {
+    "microphoneUnavailable": "Microphone access is unavailable.",
+    "requestFailed": "Unable to process your voice request."
+  },
+  "labels": {
+    "or": "OR",
+    "orSentence": "Or"
+  },
+  "auth": {
+    "signIn": "Sign in",
+    "telegram": {
+      "bot": "{{appName}} Bot",
+      "signIn": "Sign in with Telegram",
+      "link": "Link Telegram"
+    },
+    "registration": {
+      "title": "Registration",
+      "submit": "Register"
+    },
+    "recentAccounts": {
+      "title": "Recent accounts",
+      "newAccount": "New account"
+    },
+    "google": {
+      "signIn": "Sign in with Google"
+    },
+    "github": {
+      "signIn": "Sign in with GitHub"
+    },
+    "microsoft": {
+      "signIn": "Sign in with Microsoft"
+    },
+    "facebook": {
+      "signIn": "Sign in with Facebook"
+    },
+    "passkey": {
+      "signIn": "Sign in with a passkey",
+      "signInFailed": "Passkey sign-in failed.",
+      "addFailed": "Failed to add the passkey."
+    },
+    "emailCode": {
+      "instructions": "Enter the code sent to your email. Check spam folder!",
+      "send": "Send code to email",
+      "prompt": "Enter code from email:"
+    },
+    "passwordReset": {
+      "forgot": "Forgot your password?",
+      "changeFailed": "Failed to change the password. The link may have expired.",
+      "linkSent": "Password reset link sent!",
+      "followLink": "Follow the link sent to your email address to reset your password",
+      "requestDescription": "We will send a password recovery link to your email address:",
+      "request": "Request password reset",
+      "invalidLink": "The password recovery link is invalid or has expired.",
+      "changedTitle": "Password changed",
+      "changedDescription": "Your password has been successfully changed. You can now log in to your account with your new password.",
+      "title": "Password Recovery",
+      "newPasswordPrompt": "Enter a new password for your account.",
+      "changing": "Changing password..."
+    },
+    "backToLogin": "Back to login",
+    "emailConfirmation": {
+      "title": "Confirm your email address",
+      "sent": "We sent a confirmation email to the email address you provided.",
+      "instructions": "Open the email and click the confirmation button to complete your registration.",
+      "resendHint": "If you didn't receive the email, check your spam folder or try requesting the email again.",
+      "resendFailed": "Failed to send the email. Please try again later.",
+      "resend": "Resend email",
+      "resent": "Email sent again."
+    },
+    "checkEmail": "Check your email!",
+    "termsNotice": "By continuing to use {{appName}}, you accept the",
+    "privacyPolicy": "Privacy Policy",
+    "errors": {
+      "USER_NOT_FOUND": "User not found.",
+      "FAILED_TO_CREATE_USER": "Failed to create user.",
+      "FAILED_TO_CREATE_SESSION": "Failed to create session.",
+      "FAILED_TO_UPDATE_USER": "Failed to update user.",
+      "FAILED_TO_GET_SESSION": "Failed to get session.",
+      "INVALID_PASSWORD": "Invalid password.",
+      "INVALID_EMAIL": "Invalid email.",
+      "INVALID_EMAIL_OR_PASSWORD": "Invalid email or password.",
+      "INVALID_USER": "Invalid user.",
+      "SOCIAL_ACCOUNT_ALREADY_LINKED": "This social account is already linked.",
+      "PROVIDER_NOT_FOUND": "Authentication provider not found.",
+      "INVALID_TOKEN": "Invalid token.",
+      "TOKEN_EXPIRED": "Token has expired.",
+      "ID_TOKEN_NOT_SUPPORTED": "ID tokens are not supported.",
+      "FAILED_TO_GET_USER_INFO": "Failed to get user information.",
+      "USER_EMAIL_NOT_FOUND": "User email not found.",
+      "EMAIL_NOT_VERIFIED": "Email address is not verified.",
+      "PASSWORD_TOO_SHORT": "Password is too short.",
+      "PASSWORD_TOO_LONG": "Password is too long.",
+      "USER_ALREADY_EXISTS": "User already exists.",
+      "USER_ALREADY_EXISTS_USE_ANOTHER_EMAIL": "User already exists. Use another email.",
+      "EMAIL_CAN_NOT_BE_UPDATED": "Email address cannot be updated.",
+      "CHANGE_EMAIL_DISABLED": "Changing the email address is disabled.",
+      "CREDENTIAL_ACCOUNT_NOT_FOUND": "Credential account not found.",
+      "SESSION_EXPIRED": "Session expired. Please authenticate again.",
+      "FAILED_TO_UNLINK_LAST_ACCOUNT": "You cannot unlink your last account.",
+      "ACCOUNT_NOT_FOUND": "Account not found.",
+      "USER_ALREADY_HAS_PASSWORD": "User already has a password. Provide it to delete the account.",
+      "CROSS_SITE_NAVIGATION_LOGIN_BLOCKED": "Cross-site login was blocked because the request may be a CSRF attack.",
+      "VERIFICATION_EMAIL_NOT_ENABLED": "Email verification is not enabled.",
+      "EMAIL_ALREADY_VERIFIED": "Email address is already verified.",
+      "EMAIL_MISMATCH": "Email addresses do not match.",
+      "SESSION_NOT_FRESH": "Session is not fresh enough for this action.",
+      "LINKED_ACCOUNT_ALREADY_EXISTS": "A linked account already exists.",
+      "INVALID_ORIGIN": "Invalid origin.",
+      "INVALID_CALLBACK_URL": "Invalid callback URL.",
+      "INVALID_REDIRECT_URL": "Invalid redirect URL.",
+      "INVALID_ERROR_CALLBACK_URL": "Invalid error callback URL.",
+      "INVALID_NEW_USER_CALLBACK_URL": "Invalid new-user callback URL.",
+      "MISSING_OR_NULL_ORIGIN": "Origin is missing or null.",
+      "CALLBACK_URL_REQUIRED": "Callback URL is required.",
+      "FAILED_TO_CREATE_VERIFICATION": "Unable to create verification.",
+      "FIELD_NOT_ALLOWED": "This field cannot be set.",
+      "ASYNC_VALIDATION_NOT_SUPPORTED": "Async validation is not supported.",
+      "VALIDATION_ERROR": "Validation error.",
+      "MISSING_FIELD": "This field is required.",
+      "METHOD_NOT_ALLOWED_DEFER_SESSION_REQUIRED": "POST requests require deferred session refresh to be enabled.",
+      "BODY_MUST_BE_AN_OBJECT": "Request body must be an object.",
+      "PASSWORD_ALREADY_SET": "User already has a password.",
+      "OTP_NOT_ENABLED": "One-time passwords are not enabled.",
+      "OTP_HAS_EXPIRED": "One-time password has expired.",
+      "TOTP_NOT_ENABLED": "Authenticator codes are not enabled.",
+      "TWO_FACTOR_NOT_ENABLED": "Two-factor authentication is not enabled.",
+      "BACKUP_CODES_NOT_ENABLED": "Backup codes are not enabled.",
+      "INVALID_BACKUP_CODE": "Invalid backup code.",
+      "INVALID_CODE": "Invalid code.",
+      "TOO_MANY_ATTEMPTS_REQUEST_NEW_CODE": "Too many attempts. Please request a new code.",
+      "ACCOUNT_TEMPORARILY_LOCKED": "Too many failed verification attempts. Your account is temporarily locked. Please try again later.",
+      "INVALID_TWO_FACTOR_COOKIE": "Invalid two-factor cookie.",
+      "PASSWORD_COMPROMISED": "This password has appeared in a data breach. Please choose a different password."
+    }
+  },
+  "fields": {
+    "firstName": "First name",
+    "lastName": "Last name",
+    "name": "Name",
+    "serverUrl": "Server URL",
+    "company": "Company",
+    "actions": "Actions",
+    "role": "Role",
+    "type": "Type",
+    "password": "Password",
+    "currentPassword": "Old password",
+    "newPassword": "New password",
+    "repeatNewPassword": "Repeat new password",
+    "repeatPassword": "Repeat password",
+    "id": "ID",
+    "email": "Email"
+  },
+  "status": {
+    "notAssigned": "Not assigned",
+    "connected": "Connected",
+    "notConnected": "Not connected",
+    "sending": "Sending..."
+  },
+  "feedback": {},
+  "profile": {
+    "logOut": "Log out",
+    "telegram": {
+      "description": "Link Telegram for authentication and notifications!",
+      "title": "Telegram"
+    },
+    "passkey": {
+      "title": "Passkeys",
+      "description": "Use a passkey to sign in securely without a password.",
+      "name": "Passkey name (optional)",
+      "add": "Add passkey",
+      "added": "Passkey added successfully.",
+      "addedOn": "Added {{date}}",
+      "unnamed": "Unnamed passkey",
+      "rename": "Rename passkey",
+      "updated": "Passkey renamed successfully.",
+      "removed": "Passkey removed successfully.",
+      "removeConfirmation": "Remove this passkey? You will not be able to use it to sign in again.",
+      "loadFailed": "Failed to load your passkeys.",
+      "manageFailed": "Failed to update the passkey."
+    },
+    "accounts": {
+      "title": "Connected accounts",
+      "description": "Manage the ways you can access your account.",
+      "empty": "No additional accounts are connected.",
+      "connected": "Connected",
+      "notConnected": "Not connected",
+      "unlinkTitle": "Unlink account",
+      "unlinkConfirmation": "Unlink this account? You may lose access through this method.",
+      "unlinked": "Account unlinked successfully.",
+      "passwordBound": "Password access enabled successfully.",
+      "passwordChanged": "Password changed successfully.",
+      "passwordCreationTitle": "Create a password",
+      "passwordCreationDescription": "We'll email you a link to create a password for your account.",
+      "sendPasswordCreationLink": "Send creation link",
+      "bindPasswordTitle": "Set a password",
+      "bindPasswordDescription": "Set a password so you can access your account with your email and password.",
+      "changePassword": "Change password",
+      "changePasswordDescription": "Enter your current password and choose a new one.",
+      "passwordManagementTitle": "Password access",
+      "passwordManagementDescription": "Change your password or remove password access from this account.",
+      "deletePassword": "Delete password",
+      "providers": {
+        "credential": "Password",
+        "google": "Google",
+        "github": "GitHub",
+        "microsoft": "Microsoft",
+        "facebook": "Facebook",
+        "telegram-oidc": "Telegram"
+      }
+    },
+    "password": {
+      "change": "Change password",
+      "create": "Create password",
+      "editTitle": "Change password"
+    },
+    "twoFactor": {
+      "title": "Two-factor authentication",
+      "description": "Protect your account with an authenticator app and recovery codes.",
+      "enabled": "Enabled",
+      "disabled": "Disabled",
+      "password": "Confirm with password",
+      "code": "Authenticator code",
+      "backupCode": "Backup code",
+      "trustDevice": "Trust this device",
+      "enable": "Set up 2FA",
+      "enableDescription": "Set up an authenticator app to protect your account.",
+      "verify": "Verify and enable",
+      "disable": "Disable 2FA",
+      "useBackupCode": "Use a backup code",
+      "useAuthenticatorCode": "Use an authenticator code",
+      "regenerateBackupCodes": "Generate new backup codes",
+      "scanQr": "Scan this QR code with your authenticator app.",
+      "openAuthenticator": "Open authenticator app",
+      "manualSetup": "Can't scan the QR code? Enter this setup key manually in your authenticator app.",
+      "copySetupKey": "Copy setup key",
+      "setupKeyCopied": "Setup key copied.",
+      "setupKeyCopyFailed": "Could not copy the setup key.",
+      "backupCodesDescription": "Save these backup codes in a secure place. Each code can be used once.",
+      "downloadBackupCodes": "Download recovery codes",
+      "recoveryCodesDownloaded": "I have downloaded my recovery codes",
+      "enabledSuccess": "Two-factor authentication enabled.",
+      "disabledSuccess": "Two-factor authentication disabled.",
+      "backupCodesGenerated": "New backup codes generated."
+    },
+    "sessions": {
+      "title": "Active sessions",
+      "description": "Review devices signed in to your account and sign out any you do not recognize.",
+      "empty": "No active sessions found.",
+      "unknownDevice": "Unknown device",
+      "devices": {
+        "desktop": "Desktop",
+        "mobile": "Mobile",
+        "tablet": "Tablet",
+        "unknown": "Unknown device"
+      },
+      "current": "Current device",
+      "lastActive": "Last active {{date}}",
+      "revoke": "Sign out device",
+      "revokeOthers": "Sign out other devices",
+      "revoked": "Device signed out successfully.",
+      "otherSessionsRevoked": "All other devices have been signed out.",
+      "loadFailed": "Failed to load active sessions.",
+      "manageFailed": "Failed to manage the session."
+    },
+    "editTitle": "Edit profile",
+    "language": "Interface language",
+    "theme": {
+      "title": "Color theme",
+      "system": "System",
+      "light": "Light",
+      "dark": "Dark"
+    }
+  },
+  "validation": {
+    "passwordsDoNotMatch": "Passwords do not match.",
+    "fillBothFields": "Please fill in both fields.",
+    "passwordMinLength": "The password must be at least 8 characters long.",
+    "currentPasswordRequired": "Enter your current password."
+  },
+  "chat": {
+    "messagePlaceholder": "Enter message...",
+    "title": "Chat",
+    "empty": "No chats!"
+  },
+  "editor": {
+    "language": "Language",
+    "languages": {
+      "javascript": "JavaScript",
+      "typescript": "TypeScript",
+      "python": "Python",
+      "json": "JSON",
+      "html": "HTML",
+      "css": "CSS"
+    }
+  },
+  "schedules": {
+    "everyDay": "Every day"
+  },
+  "install": {
+    "iosInstructions": "To install, click the Share button in Safari and select Go to Home Screen.",
+    "iosShareInstructions": "Tap on \"Share\" and select the \"Add to Home Screen\" option",
+    "title": "Install the {{appName}} application",
+    "description": "Install the app for quick access and notifications."
+  },
+  "notifications": {
+    "newMessage": "New message from {{name}}",
+    "permission": {
+      "title": "Turn on notifications",
+      "description": "Allow notifications to receive important messages and updates"
+    }
+  },
+  "errors": {
+    "supportPrompt": "Questions? Contact support:",
+    "generic": {
+      "title": "Sorry, an unexpected error occurred!",
+      "body": "Please try again. If the error persists, contact application support."
+    },
+    "alreadyLinkedTitle": "This account is already linked to another user!",
+    "alreadyLinkedBody": "Please choose another account to link to your {{appName}} account.",
+    "telegram": {
+      "title": "An unexpected Telegram error occurred",
+      "body": "Please try again!"
+    },
+    "emailSubject": "Problem with the {{appName}} service",
+    "emailBody": "Hello!\n\nI have encountered a problem with my {{appName}} account:\n\n"
+  },
+  "navigation": {
+    "tabs": {
+      "analytics": "Analytics",
+      "accounts": "Accounts",
+      "myaccount": "Account",
+      "chat": "Chat",
+      "editor": "Editor",
+      "notifications": "Notifications",
+      "welcome": "Welcome"
+    }
+  },
+  "landing": {
+    "navigation": {
+      "primary": "Primary navigation",
+      "home": "Home",
+      "stack": "Stack",
+      "projects": "Projects",
+      "contact": "Contact",
+      "account": "Open account",
+      "profile": "Profile",
+      "switchToLightTheme": "Switch to light theme",
+      "switchToDarkTheme": "Switch to dark theme"
+    },
+    "hero": {
+      "greeting": "Hi, my name is Vasya!",
+      "blackCat": "I am a cat with an impressive level of darkness",
+      "owner": "And my owner is a",
+      "lead": "Meow meow meow? Meow meow."
+    },
+    "actions": {
+      "viewProjects": "View projects"
+    },
+    "projects": {
+      "title": "Projects",
+      "description": "My owner has not had time to collect all his projects, so for now, have a look at someone else's, meow?"
+    },
+    "notifications": {
+      "thanks": "Thanks!",
+      "selfDestruct": "Your device self-destruct sequence has been activated..."
+    },
+    "contactButton": {
+      "copied": "Copied!",
+      "contact": "Get in touch"
+    },
+    "contact": {
+      "title": "Send emails to my litterbox!",
+      "description": "I will gladly deliver every message to my owner, and I definitely will not lose anything!"
+    },
+    "footer": {
+      "copyright": "2026 © Built with ❤️ and 😺, without ☕ and 💤",
+      "author": "By OquCat"
+    },
+    "visitorCounter": {
+      "liveVisits": "Live visits"
+    },
+    "availability": {
+      "readyFlapWords": ["Ready?", "Ready.", "Ready?"],
+      "tornFlapWords": ["Dropped!", "Abandoned!", "Dropped!"],
+      "coupon": "95% discount coupon",
+      "tearOff": "Tear it off   →",
+      "readyTitle": "My owner is ready to take your money — and buy me food!",
+      "tornTitle": "You dropped the coupon — why? No more discount!",
+      "readyDescription": "Tear off the coupon on the left for a discount. Do not drop it!",
+      "tornDescription": "No worries: my owner does not accept dry-cleaning coupons anyway."
+    },
+    "techStack": {
+      "intro": "My owner has been trained in the following commands:",
+      "title": "Technology stack",
+      "instructions": "Hover over a sticker for information, double-click to open its website!",
+      "items": {
+        "React": "A library for building user interfaces.",
+        "TypeScript": "JavaScript with syntax for static typing.",
+        "Node_js": "A JavaScript runtime built on V8.",
+        "PostgreSQL": "A powerful open-source relational database.",
+        "Vite": "A fast toolchain for modern frontend development.",
+        "Three_js": "A JavaScript library for 3D rendering.",
+        "MUI": "A set of React components implementing Material Design.",
+        "Axios": "A Promise-based HTTP client for the browser and Node.js.",
+        "Better Auth": "An authentication framework for TypeScript applications.",
+        "Express": "A minimalist web framework for Node.js.",
+        "Next_js": "A React framework for full-stack web applications.",
+        "NestJS": "A progressive Node.js framework for scalable server applications.",
+        "Firebase": "Google's platform for building applications and backend services.",
+        "OpenAI": "A platform for researching and applying artificial intelligence.",
+        "Oxc": "High-performance tooling for JavaScript and TypeScript.",
+        "Python": "A general-purpose programming language.",
+        "NumPy": "A Python library for numerical computing.",
+        "SciPy": "A collection of tools for scientific computing.",
+        "Pandas": "A library for data analysis and manipulation in Python.",
+        "Matplotlib": "A flexible Python visualization library.",
+        "Seaborn": "A statistical visualization library based on Matplotlib.",
+        "scikit-learn": "Tools for machine learning in Python.",
+        "PyTorch": "A deep learning framework for research and production.",
+        "TensorFlow": "An end-to-end platform for machine learning.",
+        "React Bits": "An open collection of animated React components for expressive interfaces."
+      }
+    }
+  },
+  "roles": {
+    "superadmin": "Super Administrator",
+    "user": "User"
+  },
+  "weekdays": {
+    "long": {
+      "0": "Monday",
+      "1": "Tuesday",
+      "2": "Wednesday",
+      "3": "Thursday",
+      "4": "Friday",
+      "5": "Saturday",
+      "6": "Sunday"
+    },
+    "short": {
+      "0": "Mon",
+      "1": "Tue",
+      "2": "Wed",
+      "3": "Thu",
+      "4": "Fri",
+      "5": "Sat",
+      "6": "Sun"
+    }
+  },
+  "api": {
+    "success": {
+      "registrationCompleted": "User successfully registered!",
+      "telegramLinked": "Telegram successfully linked!",
+      "passwordUpdated": "Password successfully updated!",
+      "avatarUpdated": "Avatar updated successfully!",
+      "profileUpdated": "Profile updated successfully!"
+    },
+    "errors": {
+      "accountNotFound": "Account not found!",
+      "useGoogleSignIn": "Use Google account to sign in!",
+      "incorrectPassword": "Incorrect password!",
+      "invalidToken": "Invalid token!",
+      "userNotFound": "User not found!",
+      "telegramNotLinked": "Telegram not linked!",
+      "invalidCode": "Invalid or expired code!",
+      "emailAlreadyRegistered": "Email already registered!",
+      "companyNotFound": "Company not found!",
+      "avatarMissing": "No avatar file uploaded!",
+      "authorizationRequired": "Authorization required!",
+      "forbidden": "Access denied!",
+      "tooManyRequests": "Too many requests! Please try again in 15 minutes!",
+      "validation": "Check the entered data!",
+      "internalServer": "Internal server error.",
+      "multipleAvatarFiles": "Upload only one avatar file.",
+      "invalidFile": "Invalid file."
+    }
+  }
+}

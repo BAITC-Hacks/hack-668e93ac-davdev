@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">"Aşyq Ökpe"</string>
+    <string name="main_activity_title">"Aşyq Ökpe"</string>
+    <string name="fcm_default_channel_name">Notifications</string>
+</resources>

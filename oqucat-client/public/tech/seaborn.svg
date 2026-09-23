@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img">
+  <title>Seaborn</title>
+  <circle cx="64" cy="64" r="60" fill="#4c72b0"/>
+  <path d="M16 70c16-26 30 18 46-8s30 18 50-12" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="8"/>
+  <path d="M24 98V80m20 18V64m20 34V76m20 22V54m20 44V72" stroke="#55a868" stroke-linecap="round" stroke-width="10"/>
+  <circle cx="30" cy="38" r="4" fill="#dd8452"/>
+  <circle cx="50" cy="28" r="4" fill="#dd8452"/>
+  <circle cx="73" cy="40" r="4" fill="#dd8452"/>
+</svg>

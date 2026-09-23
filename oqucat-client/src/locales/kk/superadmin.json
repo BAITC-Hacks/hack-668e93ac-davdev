@@ -1,0 +1,29 @@
+{
+  "companies": {
+    "adminEmail": "Әкімші email",
+    "usersTitle": "Компания пайдаланушылары",
+    "empty": "Компаниялар жоқ!",
+    "createTitle": "Жаңа компания құру",
+    "adminCredentialsNotice": "Компания әкімшісіне көрсетілген электрондық поштаға тіркелгіге кіру деректері жіберіледі.",
+    "create": "Жаңа компания"
+  },
+  "devices": {},
+  "exercises": {
+    "step": {}
+  },
+  "deviceTypes": {},
+  "actions": {
+    "edit": "Өңдеу",
+    "cancel": "Бас тарту"
+  },
+  "notifications": {
+    "title": "Хабарландыру жіберу",
+    "user": "Пайдаланушы",
+    "subject": "Тақырып",
+    "message": "Хабарлама",
+    "send": "Жіберу",
+    "validation": {
+      "fillAllFields": "Барлық өрістерді толтырыңыз!"
+    }
+  }
+}

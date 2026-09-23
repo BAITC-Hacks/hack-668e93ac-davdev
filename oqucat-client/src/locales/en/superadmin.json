@@ -1,0 +1,29 @@
+{
+  "companies": {
+    "adminEmail": "Administrator email",
+    "usersTitle": "Company users",
+    "empty": "No companies!",
+    "createTitle": "Create a new company",
+    "adminCredentialsNotice": "The company administrator will receive account login details at the specified email address.",
+    "create": "New company"
+  },
+  "devices": {},
+  "exercises": {
+    "step": {}
+  },
+  "deviceTypes": {},
+  "actions": {
+    "edit": "Edit",
+    "cancel": "Cancel"
+  },
+  "notifications": {
+    "title": "Send notification",
+    "user": "User",
+    "subject": "Title",
+    "message": "Message",
+    "send": "Send",
+    "validation": {
+      "fillAllFields": "Fill in all fields!"
+    }
+  }
+}

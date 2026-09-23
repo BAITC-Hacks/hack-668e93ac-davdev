@@ -1,0 +1,44 @@
+supportedArchitectures:
+  os:
+    - win32
+    - linux
+  cpu:
+    - x64
+  libc:
+    - glibc
+
+allowBuilds:
+  '@firebase/util': true
+  '@swc/core': true
+  protobufjs: true
+onlyBuiltDependencies:
+  - '@swc/core'
+  - esbuild
+catalog:
+  vite: npm:@voidzero-dev/vite-plus-core@0.3.3
+  vite-plus: 0.3.3
+overrides:
+  vite@*: 'catalog:'
+peerDependencyRules:
+  allowAny:
+    - vite
+  allowedVersions:
+    vite: '*'
+minimumReleaseAgeExclude:
+  - '@oxlint-tsgolint/darwin-arm64@7.0.2002'
+  - '@oxlint-tsgolint/darwin-x64@7.0.2002'
+  - '@oxlint-tsgolint/linux-arm64@7.0.2002'
+  - '@oxlint-tsgolint/linux-x64@7.0.2002'
+  - '@oxlint-tsgolint/win32-arm64@7.0.2002'
+  - '@oxlint-tsgolint/win32-x64@7.0.2002'
+  - '@voidzero-dev/vite-plus-core@0.3.3'
+  - '@voidzero-dev/vite-plus-darwin-arm64@0.3.3'
+  - '@voidzero-dev/vite-plus-darwin-x64@0.3.3'
+  - '@voidzero-dev/vite-plus-linux-arm64-gnu@0.3.3'
+  - '@voidzero-dev/vite-plus-linux-arm64-musl@0.3.3'
+  - '@voidzero-dev/vite-plus-linux-x64-gnu@0.3.3'
+  - '@voidzero-dev/vite-plus-linux-x64-musl@0.3.3'
+  - '@voidzero-dev/vite-plus-win32-arm64-msvc@0.3.3'
+  - '@voidzero-dev/vite-plus-win32-x64-msvc@0.3.3'
+  - oxlint-tsgolint@7.0.2002
+  - vite-plus@0.3.3

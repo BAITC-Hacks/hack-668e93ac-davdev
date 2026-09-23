@@ -1,0 +1,21 @@
+@media (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .portfolio-landing,
+  .portfolio-landing * {
+    cursor: none;
+  }
+
+  .landing-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 18px;
+    height: 18px;
+    border: 2px solid currentColor;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 99999;
+    transform: translate3d(-100px, -100px, 0);
+    translate: -50% -50%;
+    will-change: transform;
+  }
+}
