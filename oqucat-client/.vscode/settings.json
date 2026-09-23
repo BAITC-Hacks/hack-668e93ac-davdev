@@ -1,0 +1,45 @@
+{
+  "i18n-ally.localesPaths": [
+    "public/locales",
+    "src/locales",
+    "src/components/i18n"
+  ],
+  "i18n-ally.keystyle": "nested",
+  "i18n-ally.namespace": true,
+  "i18n-ally.pathMatcher": "{locale}/{namespace}.json",
+  "i18n-ally.regex.key": "[\\w.:-]+",
+  "peacock.color": "#003166",
+  "workbench.colorCustomizations": {
+    "commandCenter.border": "#e7e7e799",
+    "titleBar.activeBackground": "#003166",
+    "titleBar.activeForeground": "#e7e7e7",
+    "titleBar.inactiveBackground": "#00316699",
+    "titleBar.inactiveForeground": "#e7e7e799",
+    "commandCenter.foreground": "#e7e7e7"
+  },
+  "editor.defaultFormatter": "oxc.oxc-vscode",
+  "[javascript]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "oxc.disableNestedConfig": true,
+  "oxc.fmt.disableNestedConfig": true,
+  "editor.formatOnSave": true,
+  "editor.formatOnSaveMode": "file",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.oxc": "explicit"
+  },
+  "chat.mcp.serverSampling": {
+    "oqucat-client/.vscode/mcp.json: shadcn": {
+      "allowedModels": []
+    }
+  }
+}

@@ -1,0 +1,8 @@
+personality = "pragmatic"
+
+[mcp_servers.betterauth]
+url = "https://mcp.better-auth.com/mcp"
+
+[mcp_servers.playwright]
+command = "npx"
+args = ["-y", "@playwright/mcp@latest"]

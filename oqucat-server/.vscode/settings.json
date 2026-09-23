@@ -1,0 +1,32 @@
+{
+  "workbench.colorCustomizations": {
+    "commandCenter.border": "#e7e7e799",
+    "titleBar.activeBackground": "#663700",
+    "titleBar.activeForeground": "#e7e7e7",
+    "titleBar.inactiveBackground": "#66370099",
+    "titleBar.inactiveForeground": "#e7e7e799",
+    "commandCenter.foreground": "#e7e7e7"
+  },
+  "peacock.color": "#663700",
+  "i18n-ally.localesPaths": ["src/locales"],
+  "i18n-ally.sourceLanguage": "ru",
+  "i18n-ally.displayLanguage": "ru",
+  "i18n-ally.keystyle": "nested",
+  "i18n-ally.pathMatcher": "{locale}/common.json",
+  "i18n-ally.enabledFrameworks": ["custom"],
+  "i18n-ally.annotationInPlace": true,
+  "editor.defaultFormatter": "oxc.oxc-vscode",
+  "[javascript]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "oxc.disableNestedConfig": true,
+  "oxc.fmt.disableNestedConfig": true,
+  "editor.formatOnSave": true,
+  "editor.formatOnSaveMode": "file",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.oxc": "explicit"
+  }
+}

@@ -1,0 +1,16 @@
+personality = "pragmatic"
+
+[mcp_servers.betterauth]
+url = "https://mcp.better-auth.com/mcp"
+
+[mcp_servers.shadcn]
+command = "pnpm"
+args = ["dlx", "shadcn@latest", "mcp"]
+
+[mcp_servers.playwright]
+command = "npx"
+args = ["-y", "@playwright/mcp@latest"]
+
+[mcp_servers.mui]
+command = "npx"
+args = ["-y", "@mui/mcp@latest"]

@@ -1,0 +1,14 @@
+#!/bin/sh
+ROOT="$(git rev-parse --show-toplevel)"
+MESSAGE_FILE="$ROOT/.git/codex-commit-message"
+SKIP_FILE="$ROOT/.git/codex-skip-commit-checks"
+
+if test -f "$SKIP_FILE"; then
+  rm -f "$SKIP_FILE"
+  exit 0
+fi
+
+node "$ROOT/scripts/pre-commit.mjs"
+STATUS=$?
+rm -f "$MESSAGE_FILE"
+exit $STATUS
