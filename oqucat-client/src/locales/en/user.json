@@ -97,13 +97,13 @@
       "description": "Join the platform to turn knowledge and ideas into useful solutions."
     },
     "vasya": {
-      "title": "Hi, I'm Vasily.",
+      "title": "Hi, I'm Blaze.",
       "accent": "Let's make something useful.",
       "description": "Meet OquCat, where student teams find business challenges and turn their ideas into real projects.",
-      "scene": "Vasily, the 3D cat and your OquCat guide",
-      "loading": "Loading Vasily",
+      "scene": "Blaze, the 3D cat and your OquCat guide",
+      "loading": "Loading Blaze",
       "caption": "Your guide from idea to project",
-      "guide": "Vasily explains",
+      "guide": "Blaze explains",
       "projectTitle": "How an idea becomes a project",
       "projectDescription": "A business has a challenge. A team has a fresh perspective. Here is an example of how they meet on OquCat."
     }
