@@ -2,7 +2,6 @@ import { Router } from 'express'
 import { toFile } from 'openai'
 
 import cfg from '@/config'
-import { logger } from '@/logger'
 import { generateVoice } from '@/modules/llm/generateVoice'
 import { getOpenaiResponse } from '@/modules/llm/getOpenaiResponse'
 import { openai } from '@/modules/llm/openai'

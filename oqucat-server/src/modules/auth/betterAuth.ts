@@ -239,6 +239,13 @@ export const auth = betterAuth({
             error: 'RBAC off',
           }),
         },
+        [UserRole.BUSINESS]: {
+          statements: {},
+          authorize: () => ({
+            success: false,
+            error: 'RBAC off',
+          }),
+        },
         [UserRole.SUPERADMIN]: {
           statements: {},
           authorize: () => ({
