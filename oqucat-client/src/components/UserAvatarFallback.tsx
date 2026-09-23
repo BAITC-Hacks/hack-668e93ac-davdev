@@ -18,7 +18,7 @@ const UserAvatarFallback = () => {
           height: 24,
           width: 24,
           borderRadius: '50%',
-          mb: { xs: 0, sm: '6px' },
+          // mb: { xs: 0, sm: '6px' },
         }}
       >
         <img

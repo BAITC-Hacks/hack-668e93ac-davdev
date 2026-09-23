@@ -10,6 +10,7 @@ import { authClient } from '@/auth/betterAuth'
 import { languages } from '@/types/Languages'
 
 import { changeLanguage } from './i18n/changeLanguage'
+import { getLangName } from './i18n/getLangName'
 
 const PlatformControls = () => {
   const { t, i18n } = useTranslation('user')
@@ -30,7 +31,7 @@ const PlatformControls = () => {
       >
         {languages.map((language) => (
           <MenuItem key={language} value={language}>
-            {language.toUpperCase()}
+            {getLangName(language)}
           </MenuItem>
         ))}
       </Select>
