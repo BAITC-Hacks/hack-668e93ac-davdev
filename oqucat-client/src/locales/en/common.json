@@ -351,6 +351,10 @@
   },
   "navigation": {
     "tabs": {
+      "tasks": "Tasks",
+      "team": "My team",
+      "responses": "My applications",
+      "rankings": "Rankings",
       "analytics": "Analytics",
       "accounts": "Accounts",
       "myaccount": "Account",

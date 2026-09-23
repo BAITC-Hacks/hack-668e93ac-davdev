@@ -351,6 +351,10 @@
   },
   "navigation": {
     "tabs": {
+      "tasks": "Тапсырмалар",
+      "team": "Менің командам",
+      "responses": "Менің өтінімдерім",
+      "rankings": "Рейтингтер",
       "analytics": "Аналитика",
       "accounts": "Басқару",
       "myaccount": "Аккаунт",

@@ -1,0 +1,241 @@
+{
+  "navigation": {
+    "primary": "Main navigation",
+    "workspace": "Student workspace",
+    "home": "Back to home",
+    "open": "Open menu",
+    "close": "Close menu",
+    "language": "Interface language",
+    "lightTheme": "Use light theme",
+    "darkTheme": "Use dark theme",
+    "teamTitle": "Better together",
+    "teamDescription": "Join forces, share ideas and solve business challenges.",
+    "openTeam": "Go to my team"
+  },
+  "demo": {
+    "notice": "Preview. Tasks and rankings are examples. Creating teams and sending applications are not available yet.",
+    "example": "Example",
+    "unavailable": "This feature will be available in a later stage."
+  },
+  "landing": {
+    "nav": {
+      "students": "For students",
+      "business": "For businesses",
+      "how": "How it works"
+    },
+    "start": "Get started",
+    "workspace": "My workspace",
+    "footer": "Where businesses meet student teams.",
+    "hero": {
+      "eyebrow": "Businesses × student teams",
+      "title": "Real challenges.",
+      "accent": "Your next step.",
+      "description": "Connecting students and businesses: practical experience and portfolio projects for one, fresh ideas and useful solutions for the other.",
+      "student": "I am a student",
+      "business": "I represent a business",
+      "note": "From the first idea to a finished project — together."
+    },
+    "preview": {
+      "label": "From challenge to outcome",
+      "business": "BUSINESS CHALLENGE",
+      "team": "A team with an idea",
+      "idea": "Discuss. Propose. Build.",
+      "result": "Business value. Team experience.",
+      "example": "Process illustration · example task"
+    },
+    "values": {
+      "practice": "Practice on real challenges",
+      "collaboration": "Direct dialogue with businesses",
+      "growth": "Portfolio and team growth"
+    },
+    "audience": {
+      "eyebrow": "Two sides. A shared goal.",
+      "title": "Opportunities that work both ways"
+    },
+    "students": {
+      "title": "Turn knowledge into practice",
+      "description": "Find a challenge where your knowledge makes a difference. Build a team or start on your own.",
+      "points": {
+        "practice": "Work on a clear brief with a defined outcome.",
+        "team": "Apply as a team, even if you are its only member.",
+        "portfolio": "Earn experience, feedback and points for completed projects."
+      }
+    },
+    "business": {
+      "title": "Turn a need into a solution",
+      "description": "Describe your challenge and meet teams ready to propose their approach.",
+      "points": {
+        "brief": "Define the context, need and success criteria.",
+        "ideas": "Compare ideas and team members before choosing.",
+        "result": "Discuss the work and share feedback on the outcome."
+      }
+    },
+    "how": {
+      "eyebrow": "The project journey",
+      "title": "Four steps to a shared result",
+      "steps": {
+        "brief": {
+          "title": "A clear challenge",
+          "description": "A business describes its needs, constraints and expected outcome."
+        },
+        "team": {
+          "title": "A team and an idea",
+          "description": "The captain submits the team’s proposal. The business selects suitable teams."
+        },
+        "work": {
+          "title": "Working together",
+          "description": "The team tackles the task and discusses details with the business."
+        },
+        "result": {
+          "title": "Experience and recognition",
+          "description": "After completion, students and the team earn points, and the business shares feedback."
+        }
+      }
+    },
+    "cta": {
+      "title": "Your next project starts with a first step",
+      "description": "Join the platform to turn knowledge and ideas into useful solutions."
+    }
+  },
+  "tasks": {
+    "eyebrow": "Practice starts here",
+    "title": "Find a challenge for your team",
+    "subtitle": "Explore sample projects, expected outcomes and working arrangements.",
+    "search": "Search by title, description or company",
+    "sort": "Sort by",
+    "sortDefault": "Default order",
+    "sortPoints": "Highest points first",
+    "found": "Examples found: {{count}}",
+    "duration": "Duration: {{count}} wk.",
+    "points": "{{count}} points",
+    "details": "View details",
+    "back": "Back to tasks",
+    "empty": "No matches found",
+    "emptyDescription": "Try another title or clear your search.",
+    "clear": "Clear search",
+    "notFound": "This example task does not exist",
+    "reward": "Completion points",
+    "teamOnly": "Apply as a team",
+    "teamRule": "The captain submits the idea. A team of one student can also participate.",
+    "apply": "Apply",
+    "fields": {
+      "context": "Context",
+      "need": "Need",
+      "users": "Users",
+      "data": "Data",
+      "constraints": "Constraints",
+      "result": "Expected outcome",
+      "success": "Success criteria",
+      "contact": "Contact",
+      "interaction": "Working arrangements"
+    }
+  },
+  "examples": {
+    "booking": {
+      "company": "Example · local workshop",
+      "title": "Simple workshop bookings",
+      "summary": "Help a small workshop manage requests and schedules without losing track of conversations.",
+      "context": "The workshop receives requests by phone and messaging apps. Staff struggle to see the overall workload.",
+      "need": "Bring bookings and the schedule into one clear interface.",
+      "users": "Workshop customers and the administrator who manages bookings.",
+      "data": "Example services, appointment lengths and working hours. All demo data is fictional.",
+      "constraints": "The interface must work on a phone. The first version covers booking and viewing the schedule.",
+      "result": "A prototype with service and time selection and an administrator’s schedule screen.",
+      "success": "Customers understand how to choose a service and time, while the administrator can see new bookings and occupied slots.",
+      "contact": "Example client. No real contact details are provided.",
+      "interaction": "Prototype discussions and weekly demonstrations are planned."
+    },
+    "volunteers": {
+      "company": "Example · community initiative",
+      "title": "Coordinating volunteers",
+      "summary": "Bring events, participant applications and organizer information into one place.",
+      "context": "Organizers coordinate several events through separate chats and spreadsheets.",
+      "need": "Make it easier to choose events and review volunteer applications.",
+      "users": "Volunteers and event coordinators.",
+      "data": "Fictional events, dates, descriptions and participant lists.",
+      "constraints": "The first version covers an event catalog and clear application statuses. No real personal data is required.",
+      "result": "An event catalog prototype with an event page and a coordinator’s application list.",
+      "success": "Volunteers can find events and understand participation requirements. Coordinators can see the participants.",
+      "contact": "Example client. No real contact details are provided.",
+      "interaction": "Scenario discussions, an interim review and a final demonstration."
+    },
+    "reports": {
+      "company": "Example · local store",
+      "title": "Sales reports that make sense",
+      "summary": "Turn scattered store data into a clear view of sales and key metrics.",
+      "context": "The store owner manually compares reports from different periods.",
+      "need": "Show key metrics and sales trends on one screen.",
+      "users": "The store owner and manager.",
+      "data": "An anonymized sample of sales, product categories and dates.",
+      "constraints": "Use demonstration data only. Metrics must have clear labels.",
+      "result": "A dashboard prototype with metrics, a trend chart and a period selector.",
+      "success": "Users can compare periods and understand which categories generate revenue.",
+      "contact": "Example client. No real contact details are provided.",
+      "interaction": "Agree on metrics and hold regular short interface reviews."
+    }
+  },
+  "team": {
+    "eyebrow": "Achieve more together",
+    "title": "My team",
+    "subtitle": "A space for your team and shared projects.",
+    "emptyTitle": "Your team will be here",
+    "emptyDescription": "In a later stage, you will be able to create a team with a name, description and logo, then invite members.",
+    "create": "Create a team",
+    "explore": "Explore tasks",
+    "rules": {
+      "captain": {
+        "title": "The captain leads the way",
+        "description": "The creator becomes captain, manages membership and submits applications."
+      },
+      "solo": {
+        "title": "You can start alone",
+        "description": "One student is a complete team. You do not need to wait for others."
+      },
+      "oneTeam": {
+        "title": "One active team",
+        "description": "In the first version, a student can belong to only one active team."
+      }
+    }
+  },
+  "responses": {
+    "eyebrow": "From idea to project",
+    "title": "My applications",
+    "subtitle": "Your team’s proposals and business decisions will appear here.",
+    "emptyTitle": "Your first proposal is ahead",
+    "emptyDescription": "Choose a task and discuss an idea with your team. Once applications are available, the captain can submit a proposal on its behalf.",
+    "explore": "Explore tasks",
+    "processTitle": "How applications work",
+    "steps": {
+      "idea": "The captain describes the idea and attaches the team’s materials.",
+      "review": "The business reviews the proposal and team members, then makes a decision.",
+      "result": "The selected team discusses details and starts working."
+    }
+  },
+  "rankings": {
+    "eyebrow": "Results matter",
+    "title": "Rankings",
+    "subtitle": "Separate student and team rankings based on completed tasks.",
+    "switch": "Ranking type",
+    "students": "Students",
+    "teams": "Teams",
+    "place": "Place",
+    "student": "Student",
+    "team": "Team",
+    "completed": "Completed",
+    "points": "Points",
+    "aboutTitle": "Grow with your team",
+    "about": "Under the project rules, completing a task awards points to every student on the team and to the shared team account. The entries shown here are fictional examples.",
+    "names": {
+      "students": {
+        "first": "Aliya K.",
+        "second": "Daniyar M.",
+        "third": "Maria S."
+      },
+      "teams": {
+        "first": "Orbit",
+        "second": "Impulse",
+        "third": "Vector"
+      }
+    }
+  }
+}

@@ -16,8 +16,11 @@ import { useSearchParams } from 'react-router-dom'
 
 import type { TabItem } from '@/types/TabItem'
 
+import UserNavigation from './UserNavigation'
+
 interface ITabRespSelector {
   tabs: TabItem[]
+  navigation?: 'tabs' | 'sidebar'
 }
 
 const styles = {
@@ -71,7 +74,7 @@ const styles = {
   }),
 } satisfies Record<string, SxProps<Theme>>
 
-const TabRespSelector = ({ tabs }: ITabRespSelector) => {
+const TabRespSelector = ({ tabs, navigation = 'tabs' }: ITabRespSelector) => {
   const { t } = useTranslation()
   const theme = useTheme()
   const isXs = useMediaQuery(theme.breakpoints.down('sm'))
@@ -93,6 +96,16 @@ const TabRespSelector = ({ tabs }: ITabRespSelector) => {
       setSearchParams({ tab: firstTab })
     }
   }, [firstTab, queryTab, setSearchParams, tabIds])
+
+  if (navigation === 'sidebar') {
+    return (
+      <UserNavigation
+        tabs={tabs}
+        tab={tab}
+        onSelect={(id) => setSearchParams({ tab: id })}
+      />
+    )
+  }
 
   return (
     <Grow in>

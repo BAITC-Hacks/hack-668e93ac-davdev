@@ -350,6 +350,10 @@
   },
   "navigation": {
     "tabs": {
+      "tasks": "Задачи",
+      "team": "Моя команда",
+      "responses": "Мои отклики",
+      "rankings": "Рейтинги",
       "analytics": "Аналитика",
       "accounts": "Контроль",
       "myaccount": "Аккаунт",
