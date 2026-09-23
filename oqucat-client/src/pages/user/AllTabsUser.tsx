@@ -1,17 +1,10 @@
 import { useMemo } from 'react'
-import {
-  MdCode as CodeIcon,
-  MdGridView,
-  MdGroups,
-  MdSend,
-  MdEmojiEvents,
-} from 'react-icons/md'
+import { MdEmojiEvents, MdGridView, MdGroups, MdSend } from 'react-icons/md'
 
 import UserAvatarFallback from '@/components/UserAvatarFallback'
 import WorkspaceLayout from '@/components/WorkspaceLayout'
 import Chat from '@/pages/common/chat/Chat'
 import ChatBadge from '@/pages/common/chat/ChatBadge'
-import EditorPage from '@/pages/common/editor/Editor'
 import Profile from '@/pages/common/profile/Profile'
 import type { WorkspaceItem } from '@/types/WorkspaceItem'
 
@@ -31,11 +24,6 @@ const AllTabsUser = () => {
         id: 'chat',
         icon: ChatBadge,
         component: <Chat />,
-      },
-      {
-        id: 'editor',
-        icon: CodeIcon,
-        component: <EditorPage />,
       },
       {
         id: 'myaccount',

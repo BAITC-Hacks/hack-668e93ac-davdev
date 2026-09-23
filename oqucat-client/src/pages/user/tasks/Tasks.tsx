@@ -1,19 +1,23 @@
+import Alert from '@mui/material/Alert'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
+import Chip from '@mui/material/Chip'
+import CircularProgress from '@mui/material/CircularProgress'
 import InputAdornment from '@mui/material/InputAdornment'
 import MenuItem from '@mui/material/MenuItem'
 import Paper from '@mui/material/Paper'
 import Stack from '@mui/material/Stack'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
+import { useQuery } from '@tanstack/react-query'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { MdArrowForward, MdSchedule, MdSearch } from 'react-icons/md'
+import { MdArrowForward, MdSearch } from 'react-icons/md'
 import { Link, useSearchParams } from 'react-router-dom'
 
-import DemoNotice from '@/components/DemoNotice'
+import { getMarketplaceTags, getProjectCards } from '@/api/http/marketplace'
+import { queryKeys } from '@/api/http/QueryKeys'
 
-import { demoTasks } from './demoTasks'
 import TaskDetails from './TaskDetails'
 
 const Tasks = () => {
@@ -21,21 +25,48 @@ const Tasks = () => {
   const [searchParams] = useSearchParams()
   const [search, setSearch] = useState('')
   const [sort, setSort] = useState('default')
+  const [tagId, setTagId] = useState('')
+  const { data, isPending, refetch } = useQuery({
+    queryKey: queryKeys.projectCards(tagId),
+    queryFn: async () => (await getProjectCards(tagId || undefined)) ?? null,
+  })
+  const { data: tags = [], isPending: tagsPending } = useQuery({
+    queryKey: queryKeys.marketplaceTags,
+    queryFn: async () => (await getMarketplaceTags()) ?? [],
+  })
+  const tasks = data?.cards ?? []
   const taskId = searchParams.get('task')
-  const selectedTask = demoTasks.find((task) => task.id === taskId)
+  const selectedTask = tasks.find(({ card }) => card.id === taskId)
   const normalizedSearch = search.trim().toLocaleLowerCase()
-  const filteredTasks = demoTasks
-    .filter((task) =>
-      [
-        t(`examples.${task.id}.title`),
-        t(`examples.${task.id}.summary`),
-        t(`examples.${task.id}.company`),
-      ].some((value) => value.toLocaleLowerCase().includes(normalizedSearch))
+  const filteredTasks = tasks
+    .filter(({ card, company }) =>
+      [card.title, card.need, card.context, company?.name].some((value) =>
+        value?.toLocaleLowerCase().includes(normalizedSearch)
+      )
     )
     .toSorted((a, b) =>
-      sort === 'points' ? b.points - a.points : a.number.localeCompare(b.number)
+      sort === 'points' ? b.card.reward_points - a.card.reward_points : 0
     )
 
+  if (isPending) {
+    return (
+      <Stack sx={{ alignItems: 'center', py: 8 }}>
+        <CircularProgress aria-label={t('tasks.loading')} />
+      </Stack>
+    )
+  }
+  if (!data) {
+    return (
+      <Alert
+        severity="error"
+        action={
+          <Button onClick={() => void refetch()}>{t('tasks.retry')}</Button>
+        }
+      >
+        {t('tasks.loadError')}
+      </Alert>
+    )
+  }
   if (selectedTask) {
     return <TaskDetails task={selectedTask} />
   }
@@ -72,8 +103,22 @@ const Tasks = () => {
           {t('tasks.subtitle')}
         </Typography>
       </Box>
-      <DemoNotice />
       <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+        <TextField
+          select
+          label={t('tasks.tag')}
+          value={tagId}
+          disabled={tagsPending}
+          onChange={(event) => setTagId(event.target.value)}
+          sx={{ minWidth: 220 }}
+        >
+          <MenuItem value="">{t('tasks.allTags')}</MenuItem>
+          {tags.map((tag) => (
+            <MenuItem key={tag.id} value={tag.id}>
+              {tag.name}
+            </MenuItem>
+          ))}
+        </TextField>
         <TextField
           fullWidth
           label={t('tasks.search')}
@@ -110,9 +155,9 @@ const Tasks = () => {
           gap: 2.5,
         }}
       >
-        {filteredTasks.map((task) => (
+        {filteredTasks.map(({ card, company, tags: cardTags }, index) => (
           <Paper
-            key={task.id}
+            key={card.id}
             component="article"
             variant="outlined"
             sx={{
@@ -134,22 +179,19 @@ const Tasks = () => {
             >
               <Box
                 sx={{
-                  bgcolor: task.color,
-                  color: '#25301e',
+                  bgcolor: 'action.selected',
+                  color: 'text.primary',
                   borderRadius: 2,
                   px: 1.5,
                   py: 1,
                   fontWeight: 700,
                 }}
               >
-                {task.number}
+                {String(index + 1).padStart(2, '0')}
               </Box>
-              <Typography variant="caption" color="text.secondary">
-                {t('demo.example')}
-              </Typography>
             </Stack>
             <Typography variant="overline" color="text.secondary">
-              {t(`examples.${task.id}.company`)}
+              {company?.name ?? t('tasks.unknownCompany')}
             </Typography>
             <Typography
               component="h2"
@@ -161,29 +203,26 @@ const Tasks = () => {
                 mb: 1.5,
               }}
             >
-              {t(`examples.${task.id}.title`)}
+              {card.title}
             </Typography>
             <Typography
               color="text.secondary"
               sx={{ fontSize: 15, lineHeight: 1.7, mb: 3 }}
             >
-              {t(`examples.${task.id}.summary`)}
+              {card.need ?? card.context ?? t('tasks.noDescription')}
             </Typography>
-            <Stack
-              direction="row"
-              spacing={1}
-              sx={{
-                alignItems: 'center',
-                mt: 'auto',
-                mb: 2,
-                color: 'text.secondary',
-              }}
-            >
-              <MdSchedule />
-              <Typography variant="body2">
-                {t('tasks.duration', { count: task.weeks })}
-              </Typography>
-            </Stack>
+            {cardTags.length > 0 && (
+              <Stack direction="row" sx={{ gap: 1, flexWrap: 'wrap', mb: 3 }}>
+                {cardTags.map((tag) => (
+                  <Chip
+                    key={tag.id}
+                    label={tag.name}
+                    size="small"
+                    onClick={() => setTagId(tag.id)}
+                  />
+                ))}
+              </Stack>
+            )}
             <Stack
               direction="row"
               sx={{
@@ -197,11 +236,11 @@ const Tasks = () => {
               }}
             >
               <Typography sx={{ fontWeight: 700 }}>
-                {t('tasks.points', { count: task.points })}
+                {t('tasks.points', { count: card.reward_points })}
               </Typography>
               <Button
                 component={Link}
-                to={`?tab=tasks&task=${task.id}`}
+                to={`?tab=tasks&task=${card.id}`}
                 endIcon={<MdArrowForward />}
                 size="small"
               >
