@@ -149,7 +149,14 @@
     "completeness": "Description completeness: {{value}}%",
     "closed": "Applications for this task are closed.",
     "captainOnly": "Create a team or ask its captain to apply.",
-    "alreadyApplied": "Your team has already applied to this task."
+    "alreadyApplied": "Your team has already applied to this task.",
+    "loading": "Loading projects",
+    "loadError": "Projects could not be loaded.",
+    "retry": "Retry",
+    "unknownCompany": "Company",
+    "noDescription": "No project description was provided.",
+    "tag": "Tag",
+    "allTags": "All tags"
   },
   "examples": {
     "booking": {
@@ -247,6 +254,17 @@
       "pending": "Invited",
       "accepted": "Joined",
       "declined": "Declined"
+    },
+    "loading": "Loading teams",
+    "loadError": "Your teams could not be loaded.",
+    "retry": "Retry",
+    "points": "{{count}} points",
+    "rating": "Rating {{value}} ({{count}} reviews)",
+    "unknownMember": "Team member",
+    "status": {
+      "pending": "Invitation pending",
+      "accepted": "Member",
+      "declined": "Declined"
     }
   },
   "responses": {
@@ -271,7 +289,20 @@
     "withdraw": "Withdraw application",
     "withdrawConfirm": "Withdraw this application? This team will not be able to apply to the same task again.",
     "materials": "Application materials",
-    "cardUnavailable": "Task unavailable"
+    "cardUnavailable": "Task unavailable",
+    "loading": "Loading applications",
+    "loadError": "Applications could not be loaded.",
+    "retry": "Retry",
+    "unknownTeam": "Team",
+    "unknownTask": "Project",
+    "status": {
+      "pending": "Pending",
+      "interested": "Interested",
+      "accepted": "Accepted",
+      "rejected": "Rejected",
+      "withdrawn": "Withdrawn",
+      "completed": "Completed"
+    }
   },
   "rankings": {
     "eyebrow": "Results matter",
@@ -301,7 +332,10 @@
     },
     "rating": "Rating",
     "noRating": "No reviews",
-    "empty": "No ranked participants yet"
+    "empty": "No ranked participants yet",
+    "loading": "Loading ranking",
+    "loadError": "The ranking could not be loaded.",
+    "retry": "Retry"
   },
   "marketplace": {
     "loading": "Loading",

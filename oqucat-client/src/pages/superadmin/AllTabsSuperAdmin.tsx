@@ -1,14 +1,10 @@
 import { useMemo } from 'react'
-import {
-  MdCode as CodeIcon,
-  MdNotifications as NotificationsIcon,
-} from 'react-icons/md'
+import { MdNotifications as NotificationsIcon } from 'react-icons/md'
 
 import UserAvatarFallback from '@/components/UserAvatarFallback'
 import WorkspaceLayout from '@/components/WorkspaceLayout'
 import Chat from '@/pages/common/chat/Chat'
 import ChatBadge from '@/pages/common/chat/ChatBadge'
-import EditorPage from '@/pages/common/editor/Editor'
 import Profile from '@/pages/common/profile/Profile'
 import type { WorkspaceItem } from '@/types/WorkspaceItem'
 
@@ -21,11 +17,6 @@ const AllTabsSuperAdmin = () => {
         id: 'notifications',
         icon: NotificationsIcon,
         component: <NotificationsSuperadmin />,
-      },
-      {
-        id: 'editor',
-        icon: CodeIcon,
-        component: <EditorPage />,
       },
       {
         id: 'chat',
