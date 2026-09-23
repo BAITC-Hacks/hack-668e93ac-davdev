@@ -1,24 +1,24 @@
 export type VasyaExpression =
-  | "neutral"
-  | "surprised"
-  | "thinking"
-  | "unsure"
-  | "happy"
-  | "sad"
-  | "watching"
-  | "listening";
+  | 'neutral'
+  | 'surprised'
+  | 'thinking'
+  | 'unsure'
+  | 'happy'
+  | 'sad'
+  | 'watching'
+  | 'listening'
 
-export type ExpressionPose = {
-  eyeScaleY: number;
-  browRaise: number;
-  browInnerRaise: number;
-  browAsymmetry: number;
-  headTilt: number;
-  headYaw: number;
-  gazeX: number;
-  gazeY: number;
-  gazeInfluence: number;
-};
+export interface ExpressionPose {
+  eyeScaleY: number
+  browRaise: number
+  browInnerRaise: number
+  browAsymmetry: number
+  headTilt: number
+  headYaw: number
+  gazeX: number
+  gazeY: number
+  gazeInfluence: number
+}
 
 export const EXPRESSION_POSES: Record<VasyaExpression, ExpressionPose> = {
   neutral: {
@@ -109,4 +109,4 @@ export const EXPRESSION_POSES: Record<VasyaExpression, ExpressionPose> = {
     gazeY: 0,
     gazeInfluence: 1,
   },
-};
+}

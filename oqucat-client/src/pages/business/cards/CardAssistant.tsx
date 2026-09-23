@@ -105,7 +105,9 @@ const CardAssistant = ({
           {cardId && (
             <Button
               size="small"
-              disabled={!questionId || busy || voice.loading || phase !== 'idle'}
+              disabled={
+                !questionId || busy || voice.loading || phase !== 'idle'
+              }
               startIcon={<MdVolumeUp />}
               onClick={() => {
                 void voice.speak()

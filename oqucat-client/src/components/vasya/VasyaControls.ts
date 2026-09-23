@@ -15,7 +15,7 @@ export type VasyaAssistantActivity =
   | 'thinking'
   | 'talking'
 
-export type VasyaHandle = {
+export interface VasyaHandle {
   wave: () => void
   blink: () => void
   setColor: (color: THREE.ColorRepresentation) => void
@@ -33,7 +33,7 @@ export type VasyaHandle = {
   setAssistantActivity: (activity: VasyaAssistantActivity) => void
 }
 
-type VasyaControls = {
+interface VasyaControls {
   waving: RefObject<boolean>
   waveTime: RefObject<number>
   blinkTimer: RefObject<number>

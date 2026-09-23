@@ -3,11 +3,11 @@
 import { useCallback, useEffect, useRef, useState, type RefObject } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { authClient } from '@/auth/betterAuth'
 import { getAssistantVoiceResponse } from '@/api/http/assistant'
+import { authClient } from '@/auth/betterAuth'
 import { notify } from '@/context/notification/notify'
-import getLocale from '@/utils/getLocale'
 import { isLanguage } from '@/types/Languages'
+import getLocale from '@/utils/getLocale'
 
 import type { VasyaHandle } from './Vasya'
 
@@ -229,7 +229,8 @@ export const useVasyaVoiceAssistant = (
             globalThis.requestAnimationFrame(detectSpeech)
         }
 
-        animationFrameId.current = globalThis.requestAnimationFrame(detectSpeech)
+        animationFrameId.current =
+          globalThis.requestAnimationFrame(detectSpeech)
         recordingTimeout.current = globalThis.setTimeout(() => {
           if (nextRecorder.state === 'recording') {
             nextRecorder.stop()
@@ -242,7 +243,16 @@ export const useVasyaVoiceAssistant = (
     } else {
       void playGreeting()
     }
-  }, [isPending, phase, playGreeting, processRecording, returnToIdle, session, t, vasya])
+  }, [
+    isPending,
+    phase,
+    playGreeting,
+    processRecording,
+    returnToIdle,
+    session,
+    t,
+    vasya,
+  ])
 
   useEffect(
     () => () => {
