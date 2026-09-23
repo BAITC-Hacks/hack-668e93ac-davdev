@@ -7,6 +7,7 @@ export const changeLanguage = (
   i18n: i18n,
   lang: string
 ) => {
+  console.log(user)
   void i18n.changeLanguage(lang)
   if (user) {
     void authClient.updateUser({ locale: lang })
