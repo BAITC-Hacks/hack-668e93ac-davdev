@@ -14,7 +14,7 @@ import { logger } from './logger'
 import { errorMiddleware } from './middleware/error'
 import { auth } from './modules/auth/betterAuth'
 import { startCronJobs } from './modules/notification/cron'
-import bot from './modules/telegram/bot'
+// import bot from './modules/telegram/bot'
 import router from './router'
 import seedDatabase from './seeding'
 import { initSio } from './sio'
@@ -22,7 +22,7 @@ import { setupStaticDirs } from './staticDirs'
 
 await initI18n()
 
-void bot.start()
+// void bot.start()
 
 const { PORT } = cfg
 const app = express()
